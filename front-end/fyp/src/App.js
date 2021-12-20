@@ -1,7 +1,7 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LogIn from "./components/forms/LogIn";
 import styled from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Auth from "./components/forms/Auth";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -18,9 +18,8 @@ function App() {
       <BrowserRouter>
         <AppContainer>
           <Routes>
-            <Route exact path="/" element={<LogIn />} />
-            <Route exact path="/auth/signin" element={<LogIn />} />
-            <Route exact path="/auth/signup" element={<LogIn />} />
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/auth/*" element={<Auth />} />
           </Routes>
         </AppContainer>
       </BrowserRouter>
