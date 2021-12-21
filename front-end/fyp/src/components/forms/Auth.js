@@ -11,7 +11,7 @@ import {
 } from "../../styles/forms/Global";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/ContextAPI";
 
 const backdropVariants = {
   expanded: {
@@ -36,6 +36,7 @@ const expandingTransition = {
 
 const Auth = () => {
   const [isExpanded, setExpanded] = useState(false);
+  const [active, setActive] = useState("signin");
 
   const playExpandingAnimation = () => {
     setExpanded(true);
@@ -44,29 +45,56 @@ const Auth = () => {
     }, expandingTransition.duration * 1000 - 1500);
   };
 
+  const switchToSignup = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signup");
+    }, 400);
+  };
+
+  const switchToSignin = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("signin");
+    }, 400);
+  };
+
+  const contextValue = { switchToSignup, switchToSignin, active };
+
   return (
-    <BoxContainer>
-      <TopContainer>
-        <BackDrop
-          initial={false}
-          animate={isExpanded ? "expanded" : "collapsed"}
-          variants={backdropVariants}
-          transition={expandingTransition}
-        />
-        <HeaderContainer>
-          <HeaderText>Welcome</HeaderText>
-          <SmallText>Please sign-in to continue!</SmallText>
-        </HeaderContainer>
-      </TopContainer>
-      <InnerContainer>
-        <Routes>
-          <Route path="/*" element={<SignIn />} />
-          <Route path="signin" element={<SignIn />} />
-          <Route path="signup" element={<SignUp />} />
-        </Routes>
-        <p onClick={playExpandingAnimation}>Click</p>
-      </InnerContainer>
-    </BoxContainer>
+    <AuthContext.Provider value={contextValue}>
+      <BoxContainer>
+        <TopContainer>
+          <BackDrop
+            initial={false}
+            animate={isExpanded ? "expanded" : "collapsed"}
+            variants={backdropVariants}
+            transition={expandingTransition}
+          />
+          {active === "signin" && (
+            <HeaderContainer>
+              <HeaderText>LOGIN</HeaderText>
+              <SmallText>Please sign-in to continue!</SmallText>
+            </HeaderContainer>
+          )}
+          {active === "signup" && (
+            <HeaderContainer>
+              <HeaderText>SIGN-UP</HeaderText>
+              <SmallText>Create an account to continue!</SmallText>
+            </HeaderContainer>
+          )}
+        </TopContainer>
+        <InnerContainer>
+          {/* <Routes>
+            <Route path="/*" element={<SignIn />} />
+            <Route path="signin" element={<SignIn />} />
+            <Route path="signup" element={<SignUp />} />
+          </Routes> */}
+          {active === "signin" && <SignIn />}
+          {active === "signup" && <SignUp />}
+        </InnerContainer>
+      </BoxContainer>
+    </AuthContext.Provider>
   );
 };
 

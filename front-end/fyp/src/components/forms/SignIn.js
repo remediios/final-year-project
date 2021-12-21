@@ -8,9 +8,10 @@ import {
   SubmitButton,
 } from "../../styles/forms/Global";
 import { Margin } from "./Margin";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/ContextAPI";
 
 const SignIn = () => {
+  const { switchToSignup } = useContext(AuthContext);
   return (
     <FormBoxContainer>
       <FormContainer id="signin">
@@ -18,14 +19,15 @@ const SignIn = () => {
         <Input type="password" placeholder="Password" />
       </FormContainer>
       <Margin direction="vertical" margin={10} />
-      <MutedLink href="#">Forgot your password?</MutedLink>
+      <MutedLink>Forgot your password?</MutedLink>
       <Margin direction="vertical" margin="1.6em" />
       <SubmitButton type="submit" form="signin">
         Sign-In
       </SubmitButton>
       <Margin direction="vertical" margin="1em" />
-      <MutedLink href="/auth/signup">
-        Don't have an account? <BoldLink href="/auth/signup">Sign-Up</BoldLink>
+      <MutedLink>
+        Don't have an account?{" "}
+        <BoldLink onClick={switchToSignup}>Sign-Up</BoldLink>
       </MutedLink>
     </FormBoxContainer>
   );

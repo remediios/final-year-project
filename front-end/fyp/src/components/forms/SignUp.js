@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context/ContextAPI";
 import {
   BoldLink,
   FormBoxContainer,
@@ -11,6 +11,7 @@ import {
 import { Margin } from "./Margin";
 
 const SignUp = () => {
+  const { switchToSignin } = useContext(AuthContext);
   return (
     <FormBoxContainer>
       <FormContainer id="signup">
@@ -24,9 +25,9 @@ const SignUp = () => {
         Sign-Up
       </SubmitButton>
       <Margin direction="vertical" margin="1em" />
-      <MutedLink href="/auth/signin">
+      <MutedLink>
         Already have an account?
-        <BoldLink href="/auth/signin">Signin</BoldLink>
+        <BoldLink onClick={switchToSignin}>Sign-In</BoldLink>
       </MutedLink>
     </FormBoxContainer>
   );
