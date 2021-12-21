@@ -9,16 +9,48 @@ import {
   SubmitButton,
 } from "../../styles/forms/Global";
 import { Margin } from "./Margin";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   const { switchToSignin } = useContext(AuthContext);
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(JSON.stringify(data));
+    return;
+  };
+
   return (
     <FormBoxContainer>
-      <FormContainer id="signup">
-        <Input type="text" placeholder="Username" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
+      <FormContainer id="signup" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+          {...register("username", { required: true })}
+        />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Email"
+          {...register("email", { required: true })}
+        />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+          {...register("password", { required: true })}
+        />
+        <Input
+          id="passwordCheck"
+          name="passwordCheck"
+          type="password"
+          placeholder="Confirm Password"
+          {...register("passwordCheck", { required: true })}
+        />
       </FormContainer>
       <Margin direction="vertical" margin="1.4em" />
       <SubmitButton type="submit" form="signup">

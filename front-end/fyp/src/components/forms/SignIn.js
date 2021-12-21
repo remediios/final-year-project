@@ -15,8 +15,18 @@ const SignIn = () => {
   return (
     <FormBoxContainer>
       <FormContainer id="signin">
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
+        <Input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Username"
+        />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
       </FormContainer>
       <Margin direction="vertical" margin={10} />
       <MutedLink>Forgot your password?</MutedLink>
