@@ -30,7 +30,7 @@ export const InnerContainer = styled.div`
   padding: 0 1.8em;
 `;
 
-export const BackDrop = styled.div`
+export const BackDrop = styled(motion.div)`
   width: 160%;
   height: 550px;
   position: absolute;
