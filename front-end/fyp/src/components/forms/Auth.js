@@ -20,7 +20,6 @@ const Auth = () => {
           <BackDrop />
           <HeaderContainer>
             <HeaderText>Welcome</HeaderText>
-            <HeaderText>Back</HeaderText>
             <SmallText>Please sign-in to continue!</SmallText>
           </HeaderContainer>
         </TopContainer>
