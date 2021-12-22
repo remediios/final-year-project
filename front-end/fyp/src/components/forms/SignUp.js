@@ -10,11 +10,11 @@ import {
 } from "../../styles/forms/Global";
 import { Margin } from "./Margin";
 import { useAuth } from "../../contexts/AuthContext";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 
 const SignUp = () => {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const { setCurrent } = useContext(AuthContext);
   const { signup } = useAuth();
   const emailRef = useRef();
@@ -34,6 +34,7 @@ const SignUp = () => {
       setError("");
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
     } catch (error) {
       console.log(error);
       setError("Failed to create an account");

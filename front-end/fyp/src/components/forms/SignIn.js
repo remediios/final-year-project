@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import {
   BoldLink,
   FormBoxContainer,
@@ -9,16 +9,41 @@ import {
 } from "../../styles/forms/Global";
 import { Margin } from "./Margin";
 import { AuthContext } from "../../contexts/ContextAPI";
+import { useAuth } from "../../contexts/AuthContext";
+import { Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  let navigate = useNavigate();
   const { setCurrent } = useContext(AuthContext);
+  const { signin } = useAuth();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      await signin(emailRef.current.value, passwordRef.current.value);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      setError("Failed to login");
+    }
+
+    setLoading(false);
+  }
   return (
     <>
+      {error && <Alert severity="error">{error}</Alert>}
       <FormBoxContainer>
-        <FormContainer id="signin">
-          <Input type="text" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
+        <FormContainer id="signin" onSubmit={handleSubmit}>
+          <Input type="email" placeholder="Email" ref={emailRef} />
+          <Input type="password" placeholder="Password" ref={passwordRef} />
         </FormContainer>
         <Margin direction="vertical" margin={10} />
         <MutedLink>Forgot your password?</MutedLink>

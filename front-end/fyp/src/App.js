@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./components/forms/Auth";
 
@@ -18,7 +18,8 @@ function App() {
       <BrowserRouter>
         <AppContainer>
           <Routes>
-            <Route exact path="/*" element={<Dashboard />} />
+            <Route exact path="/*" element={<Navigate to="/auth" />} />
+            <Route exact path="/dashboard" element={<Dashboard />} />
             <Route path="/auth/*" element={<Auth />} />
           </Routes>
         </AppContainer>
