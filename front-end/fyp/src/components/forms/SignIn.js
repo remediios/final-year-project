@@ -11,7 +11,10 @@ import { Margin } from "./Margin";
 import { AuthContext } from "../../context/ContextAPI";
 
 const SignIn = () => {
-  const { switchToSignup } = useContext(AuthContext);
+  const { current, setCurrent } = useContext(AuthContext);
+
+  console.log(current);
+
   return (
     <FormBoxContainer>
       <FormContainer id="signin">
@@ -35,9 +38,11 @@ const SignIn = () => {
         Sign-In
       </SubmitButton>
       <Margin direction="vertical" margin="1em" />
-      <MutedLink>
+      <MutedLink href="/auth/signup">
         Don't have an account?{" "}
-        <BoldLink onClick={switchToSignup}>Sign-Up</BoldLink>
+        <BoldLink href="/auth/signup" onClick={setCurrent("signin")}>
+          Sign-Up
+        </BoldLink>
       </MutedLink>
     </FormBoxContainer>
   );

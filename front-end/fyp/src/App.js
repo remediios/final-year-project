@@ -18,7 +18,7 @@ function App() {
       <BrowserRouter>
         <AppContainer>
           <Routes>
-            <Route exact path="/" element={<HomePage />} />
+            <Route exact path="/*" element={<HomePage />} />
             <Route path="/auth/*" element={<Auth />} />
           </Routes>
         </AppContainer>

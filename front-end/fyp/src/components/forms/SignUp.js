@@ -12,9 +12,9 @@ import { Margin } from "./Margin";
 import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-  const { switchToSignin } = useContext(AuthContext);
-  const { register, handleSubmit, errors } = useForm();
-
+  const { register, handleSubmit } = useForm();
+  const { current, setCurrent } = useContext(AuthContext);
+  console.log(current);
   const onSubmit = (data) => {
     console.log(JSON.stringify(data));
     return;
@@ -57,9 +57,11 @@ const SignUp = () => {
         Sign-Up
       </SubmitButton>
       <Margin direction="vertical" margin="1em" />
-      <MutedLink>
+      <MutedLink href="/auth/signin">
         Already have an account?
-        <BoldLink onClick={switchToSignin}>Sign-In</BoldLink>
+        <BoldLink href="/auth/signin" onClick={setCurrent("signup")}>
+          Sign-In
+        </BoldLink>
       </MutedLink>
     </FormBoxContainer>
   );

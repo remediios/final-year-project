@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 
 export const BoxContainer = styled.div`
   width: 280px;
@@ -30,7 +29,7 @@ export const InnerContainer = styled.div`
   padding: 0 1.8em;
 `;
 
-export const BackDrop = styled(motion.div)`
+export const BackDrop = styled.div`
   width: 160%;
   height: 550px;
   position: absolute;
