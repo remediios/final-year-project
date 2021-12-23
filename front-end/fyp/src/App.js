@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./components/forms/Auth";
+import { AuthProvider } from "./contexts/AuthContext";
+import PrivateRoute from "./components/routes/PrivateRoute";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -15,15 +17,23 @@ const AppContainer = styled.div`
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <AuthProvider>
         <AppContainer>
           <Routes>
-            <Route exact path="/*" element={<Navigate to="/auth" />} />
-            <Route exact path="/dashboard" element={<Dashboard />} />
+            <Route
+              exact
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
             <Route path="/auth/*" element={<Auth />} />
+            <Route exact path="/*" element={<Navigate to="/auth" />} />
           </Routes>
         </AppContainer>
-      </BrowserRouter>
+      </AuthProvider>
     </>
   );
 }

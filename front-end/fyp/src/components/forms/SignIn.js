@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const SignIn = () => {
   let navigate = useNavigate();
   const { setCurrent } = useContext(AuthContext);
-  const { signin } = useAuth();
+  const { signin, currentUser } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
@@ -29,7 +29,7 @@ const SignIn = () => {
       setError("");
       setLoading(true);
       await signin(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       setError("Failed to login");
