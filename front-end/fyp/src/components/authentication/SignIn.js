@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const SignIn = () => {
   let navigate = useNavigate();
   const { setCurrent } = useContext(AuthContext);
-  const { signin, currentUser } = useAuth();
+  const { signin } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
