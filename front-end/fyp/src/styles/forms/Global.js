@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 
 export const BoxContainer = styled.div`
   width: 280px;
@@ -71,6 +70,7 @@ export const SmallText = styled.h5`
   z-index: 10;
   margin: 0;
   margin-top: 7px;
+  margin-bottom: 1.2rem;
 `;
 
 export const FormBoxContainer = styled.div`
