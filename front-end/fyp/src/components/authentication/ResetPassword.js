@@ -40,13 +40,19 @@ const ResetPassword = () => {
       document.getElementById("btn").disabled = true;
     } catch (error) {
       console.log(error);
-      if (error.code === "auth/invalid-email")
-        setError("Please enter a valid email");
-      else if (error.code === "auth/missing-email")
-        setError("Please enter a email");
-      else if (error.code === "auth/user-not-found")
-        setError("Please sign-up, account does not exist!");
-      else setError("Failed to reset password");
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Please enter a valid email");
+          break;
+        case "auth/missing-email":
+          setError("Please enter a email");
+          break;
+        case "auth/user-not-found":
+          setError("Please sign-up, account does not exist!");
+          break;
+        default:
+          setError("Failed to reset password");
+      }
     }
     setLoading(false);
   }
