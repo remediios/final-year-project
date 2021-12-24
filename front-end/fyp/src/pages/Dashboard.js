@@ -1,5 +1,5 @@
 import { Alert } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -20,6 +20,12 @@ const Dashboard = () => {
       setError("Failed to log out");
     }
   };
+
+  // FOR TESTING PURPOSES ONLY, REMOVE AFTER COMPLETED
+  useEffect(() => {
+    console.log(currentUser);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <>

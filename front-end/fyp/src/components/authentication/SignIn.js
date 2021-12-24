@@ -20,10 +20,12 @@ const SignIn = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     return setCurrent("signin");
+    //eslint-disable-next-line
   }, []);
 
   async function handleSubmit(e) {

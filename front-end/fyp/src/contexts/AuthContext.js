@@ -4,6 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
@@ -18,8 +19,12 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  function signup(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  function signup(username, email, password) {
+    return createUserWithEmailAndPassword(auth, email, password).then(() => {
+      updateProfile(auth.currentUser, {
+        displayName: username,
+      });
+    });
   }
 
   function signin(email, password) {

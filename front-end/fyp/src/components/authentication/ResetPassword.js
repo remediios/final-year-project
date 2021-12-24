@@ -18,11 +18,13 @@ const ResetPassword = () => {
   const { setCurrent } = useContext(AuthContext);
   const emailRef = useRef();
   const [error, setError] = useState("");
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     return setCurrent("reset");
+    //eslint-disable-next-line
   }, []);
 
   async function handleSubmit(e) {
