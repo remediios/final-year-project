@@ -70,7 +70,7 @@ export const MediumText = styled.h4`
   z-index: 10;
   margin-right: 110px;
   margin-top: 7px;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const SmallText = styled.h5`

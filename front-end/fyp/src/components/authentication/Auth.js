@@ -18,7 +18,6 @@ const Auth = () => {
   const [current, setCurrent] = useState("signin");
   const contextValues = { current, setCurrent };
 
-  console.log(current);
   return (
     <AuthContext.Provider value={contextValues}>
       <BoxContainer>

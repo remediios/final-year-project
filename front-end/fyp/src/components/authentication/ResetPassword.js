@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   BoldLink,
   FormBoxContainer,
@@ -10,30 +10,66 @@ import {
 } from "../../styles/forms/Global";
 import { AuthContext } from "../../contexts/ContextAPI";
 import { Margin } from "./Margin";
+import { useAuth } from "../../contexts/AuthContext";
+import { Alert } from "@mui/material";
 
 const ResetPassword = () => {
-  const emailRef = useRef();
+  const { resetPassword } = useAuth();
   const { setCurrent } = useContext(AuthContext);
+  const emailRef = useRef();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     return setCurrent("reset");
   }, []);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setMessage("");
+      setLoading(true);
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your inbox for further instructions");
+      document.getElementById("resetPassword").reset();
+      document.getElementById("btn").disabled = true;
+    } catch (error) {
+      console.log(error);
+      if (error.code === "auth/invalid-email")
+        setError("Please enter a valid email");
+      else if (error.code === "auth/missing-email")
+        setError("Please enter a email");
+      else if (error.code === "auth/user-not-found")
+        setError("Please sign-up, account does not exist!");
+      else setError("Failed to reset password");
+    }
+    setLoading(false);
+  }
+
   return (
-    <FormBoxContainer>
-      <Margin direction="vertical" margin={20} />
-      <MediumText>Enter your email :</MediumText>
-      <FormContainer id="resetPassword">
-        <Input type="email" placeholder="Email" ref={emailRef} />
-      </FormContainer>
-      <Margin direction="vertical" margin="1.6em" />
-      <SubmitButton type="submit" form="resetPassword">
-        Reset
-      </SubmitButton>
-      <Margin direction="vertical" margin="1em" />
-      <MutedLink href="/auth/signin">
-        Already have an account?
-        <BoldLink href="/auth/signin">Sign-In</BoldLink>
-      </MutedLink>
-    </FormBoxContainer>
+    <>
+      {error && <Alert severity="error">{error}</Alert>}
+      {message && <Alert severity="info">{message}</Alert>}
+      <FormBoxContainer>
+        <Margin direction="vertical" margin={10} />
+        <MediumText>Enter your email :</MediumText>
+        <FormContainer id="resetPassword" onSubmit={handleSubmit}>
+          <Input type="email" placeholder="Email" ref={emailRef} />
+        </FormContainer>
+        <Margin direction="vertical" margin="1.6em" />
+        <SubmitButton id="btn" type="submit" form="resetPassword">
+          Reset
+        </SubmitButton>
+        <Margin direction="vertical" margin="1em" />
+        <MutedLink href="/auth/signin">
+          Already have an account?
+          <BoldLink href="/auth/signin">Sign-In</BoldLink>
+        </MutedLink>
+      </FormBoxContainer>
+    </>
   );
 };
 
