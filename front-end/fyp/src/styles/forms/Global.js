@@ -63,6 +63,16 @@ export const HeaderText = styled.h2`
   margin: 0;
 `;
 
+export const MediumText = styled.h4`
+  color: #393939;
+  font-weight: 500;
+  font-size: 13px;
+  z-index: 10;
+  margin-right: 110px;
+  margin-top: 7px;
+  margin-bottom: 0.6rem;
+`;
+
 export const SmallText = styled.h5`
   color: #fff;
   font-weight: 500;

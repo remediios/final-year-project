@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../contexts/ContextAPI";
 import {
   BoldLink,
@@ -22,6 +22,10 @@ const SignUp = () => {
   const passwordCheckRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    return setCurrent("signup");
+  }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -63,9 +67,7 @@ const SignUp = () => {
         <Margin direction="vertical" margin="1em" />
         <MutedLink href="/auth/signin">
           Already have an account?
-          <BoldLink href="/auth/signin" onClick={setCurrent("signup")}>
-            Sign-In
-          </BoldLink>
+          <BoldLink href="/auth/signin">Sign-In</BoldLink>
         </MutedLink>
       </FormBoxContainer>
     </>

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import {
   BoldLink,
   FormBoxContainer,
@@ -22,6 +22,10 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    return setCurrent("signin");
+  }, []);
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -34,9 +38,9 @@ const SignIn = () => {
       console.log(error);
       setError("Failed to login");
     }
-
     setLoading(false);
   }
+
   return (
     <>
       {error && <Alert severity="error">{error}</Alert>}
@@ -46,17 +50,15 @@ const SignIn = () => {
           <Input type="password" placeholder="Password" ref={passwordRef} />
         </FormContainer>
         <Margin direction="vertical" margin={10} />
-        <MutedLink>Forgot your password?</MutedLink>
+        <MutedLink href="/auth/reset">Forgot your password?</MutedLink>
         <Margin direction="vertical" margin="1.6em" />
         <SubmitButton type="submit" form="signin">
           Sign-In
         </SubmitButton>
         <Margin direction="vertical" margin="1em" />
         <MutedLink href="/auth/signup">
-          Don't have an account?{" "}
-          <BoldLink href="/auth/signup" onClick={setCurrent("signin")}>
-            Sign-Up
-          </BoldLink>
+          Don't have an account?
+          <BoldLink href="/auth/signup">Sign-Up</BoldLink>
         </MutedLink>
       </FormBoxContainer>
     </>
