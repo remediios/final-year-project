@@ -38,7 +38,19 @@ const SignIn = () => {
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      setError("Failed to login");
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Please enter a valid email");
+          break;
+        case "auth/user-not-found":
+          setError("Please sign-up, account does not exist!");
+          break;
+        case "auth/wrong-password":
+          setError("Wrong password, try again!");
+          break;
+        default:
+          setError("Failed to create an account");
+      }
     }
     setLoading(false);
   }
