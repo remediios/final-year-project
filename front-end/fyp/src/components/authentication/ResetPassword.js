@@ -1,30 +1,29 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   BoldLink,
   FormBoxContainer,
   FormContainer,
   Input,
+  MediumText,
   MutedLink,
   SubmitButton,
 } from "../../styles/forms/Global";
-import { Margin } from "./Margin";
 import { AuthContext } from "../../contexts/ContextAPI";
+import { Margin } from "./Margin";
 import { useAuth } from "../../contexts/AuthContext";
 import { Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
-  let navigate = useNavigate();
+const ResetPassword = () => {
+  const { resetPassword } = useAuth();
   const { setCurrent } = useContext(AuthContext);
-  const { signin } = useAuth();
   const emailRef = useRef();
-  const passwordRef = useRef();
   const [error, setError] = useState("");
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
-    return setCurrent("signin");
+    return setCurrent("reset");
     //eslint-disable-next-line
   }, []);
 
@@ -33,23 +32,26 @@ const SignIn = () => {
 
     try {
       setError("");
+      setMessage("");
       setLoading(true);
-      await signin(emailRef.current.value, passwordRef.current.value);
-      navigate("/dashboard");
+      await resetPassword(emailRef.current.value);
+      setMessage("Check your inbox for further instructions");
+      document.getElementById("resetPassword").reset();
+      document.getElementById("btn").disabled = true;
     } catch (error) {
       console.log(error);
       switch (error.code) {
         case "auth/invalid-email":
           setError("Please enter a valid email");
           break;
+        case "auth/missing-email":
+          setError("Please enter a email");
+          break;
         case "auth/user-not-found":
           setError("Please sign-up, account does not exist!");
           break;
-        case "auth/wrong-password":
-          setError("Wrong password, try again!");
-          break;
         default:
-          setError("Failed to create an account");
+          setError("Failed to reset password");
       }
     }
     setLoading(false);
@@ -58,25 +60,25 @@ const SignIn = () => {
   return (
     <>
       {error && <Alert severity="error">{error}</Alert>}
+      {message && <Alert severity="info">{message}</Alert>}
       <FormBoxContainer>
-        <FormContainer id="signin" onSubmit={handleSubmit}>
-          <Input type="email" placeholder="Email" ref={emailRef} />
-          <Input type="password" placeholder="Password" ref={passwordRef} />
-        </FormContainer>
         <Margin direction="vertical" margin={10} />
-        <MutedLink href="/auth/reset">Forgot your password?</MutedLink>
+        <MediumText>Enter your email :</MediumText>
+        <FormContainer id="resetPassword" onSubmit={handleSubmit}>
+          <Input type="email" placeholder="Email" ref={emailRef} />
+        </FormContainer>
         <Margin direction="vertical" margin="1.6em" />
-        <SubmitButton type="submit" form="signin">
-          Sign-In
+        <SubmitButton id="btn" type="submit" form="resetPassword">
+          Reset
         </SubmitButton>
         <Margin direction="vertical" margin="1em" />
-        <MutedLink href="/auth/signup">
-          Don't have an account?
-          <BoldLink href="/auth/signup">Sign-Up</BoldLink>
+        <MutedLink href="/auth/signin">
+          Already have an account?
+          <BoldLink href="/auth/signin">Sign-In</BoldLink>
         </MutedLink>
       </FormBoxContainer>
     </>
   );
 };
 
-export default SignIn;
+export default ResetPassword;

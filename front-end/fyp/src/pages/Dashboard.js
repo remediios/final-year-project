@@ -1,5 +1,5 @@
 import { Alert } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -21,6 +21,12 @@ const Dashboard = () => {
     }
   };
 
+  // FOR TESTING PURPOSES ONLY, REMOVE AFTER COMPLETED
+  useEffect(() => {
+    console.log(currentUser);
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <>
       <Card>
@@ -28,7 +34,7 @@ const Dashboard = () => {
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3 ">
+          <Link to="/" className="btn btn-primary w-100 mt-3 ">
             Update Profile
           </Link>
         </Card.Body>
