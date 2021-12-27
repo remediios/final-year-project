@@ -1,3 +1,4 @@
+import { auth, db } from "../firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -6,8 +7,8 @@ import {
   sendPasswordResetEmail,
   updateProfile,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -20,11 +21,20 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function signup(username, email, password) {
-    return createUserWithEmailAndPassword(auth, email, password).then(() => {
-      updateProfile(auth.currentUser, {
-        displayName: username,
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        updateProfile(auth.currentUser, {
+          displayName: username,
+        });
+      })
+      .then(() => {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        setDoc(userRef, {
+          id: auth.currentUser.uid,
+          username: auth.currentUser ? username : auth.currentUser.displayName,
+          email: auth.currentUser.email,
+        });
       });
-    });
   }
 
   function signin(email, password) {
