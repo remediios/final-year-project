@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Auth from "./components/authentication/Auth";
 import PrivateRoute from "./components/routes/PrivateRoute";
+import TypingSpeed from "./pages/TypingSpeed";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -24,6 +25,15 @@ function App() {
             element={
               <PrivateRoute>
                 <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/test1"
+            element={
+              <PrivateRoute>
+                <TypingSpeed />
               </PrivateRoute>
             }
           />
