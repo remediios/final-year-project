@@ -12,7 +12,7 @@ import { Timer } from "../styles/texts/Global";
 
 const TypingSpeed = () => {
   const MAX_WORDS = 200;
-  const SECONDS = 10;
+  const SECONDS = 60;
   const [words, setWords] = useState([]);
   const [countDown, setCountDown] = useState(SECONDS);
   const [currentInput, setCurrentInput] = useState([]);
@@ -66,11 +66,16 @@ const TypingSpeed = () => {
   };
 
   const handleKeyDown = ({ keyCode, key }) => {
+    //spacebar
     if (keyCode === 32) {
       checkMatch();
       setCurrentInput("");
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentCharIndex(-1);
+      //backspace
+    } else if (keyCode === 8) {
+      setCurrentCharIndex(currentCharIndex - 1);
+      setCurrentChar("");
     } else {
       setCurrentCharIndex(currentCharIndex + 1);
       setCurrentChar(key);
@@ -89,6 +94,11 @@ const TypingSpeed = () => {
       } else {
         return { background: "rgb(223, 71, 89)" };
       }
+    } else if (
+      wordIndex === currentWordIndex &&
+      currentCharIndex >= words[currentWordIndex].length
+    ) {
+      return { background: "rgb(223, 71, 89)" };
     } else {
       return {};
     }
