@@ -30,7 +30,7 @@ function App() {
           />
           <Route
             exact
-            path="/test1"
+            path="/step1"
             element={
               <PrivateRoute>
                 <TypingSpeed />

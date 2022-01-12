@@ -12,7 +12,6 @@ const Dashboard = () => {
 
   const handleSignOut = async () => {
     setError("");
-
     try {
       await signout();
       navigate("/auth/signin");
