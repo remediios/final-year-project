@@ -6,43 +6,45 @@ import * as IoIcons from "react-icons/io";
 
 export const SidebarData = [
   {
-    title: "Home",
+    index: 1,
+    title: "Dashboard",
     path: "/dashboard",
     icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
   },
   {
+    index: 2,
     title: "Section2",
-    path: "/dashboard/section2",
+    path: "/dashboard",
     icon: <IoIcons.IoIosPaper />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
     subNav: [
       {
-        title: "SubSection1",
-        path: "/dashboard/section2/1",
+        title: "Sub Section 1",
+        path: "/dashboard",
         icon: <IoIcons.IoIosPaper />,
         className: "sub-nav",
       },
       {
-        title: "SubSection2",
-        path: "/dashboard/section2/2",
+        title: "Sub Section 2",
+        path: "/dashboard",
         icon: <IoIcons.IoIosPaper />,
         className: "sub-nav",
       },
     ],
   },
   {
+    index: 3,
     title: "Section3",
-    path: "/dashboard/section3",
-    icon: <AiIcons.AiFillHome />,
-    className: "nav-text",
+    path: "/dashboard",
+    icon: <IoIcons.IoIosPaper />,
   },
   {
+    index: 4,
     title: "Profile",
-    path: "/dashboard/profile",
-    icon: <MdIcons.MdOutlineAccountCircle />,
-    className: "nav-text",
+    path: "/dashboard",
+    icon: <MdIcons.MdAccountCircle />,
   },
 ];
