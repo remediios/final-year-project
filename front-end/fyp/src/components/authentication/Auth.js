@@ -8,6 +8,7 @@ import {
   HeaderText,
   SmallText,
   InnerContainer,
+  MainContainer,
 } from "../../styles/forms/Global";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -20,40 +21,42 @@ const Auth = () => {
 
   return (
     <AuthContext.Provider value={contextValues}>
-      <BoxContainer>
-        <TopContainer>
-          <BackDrop />
-          {current === "signin" && (
-            <HeaderContainer>
-              <HeaderText>LOGIN</HeaderText>
-              <SmallText>Please sign-in to continue!</SmallText>
-            </HeaderContainer>
-          )}
-          {current === "signup" && (
-            <HeaderContainer>
-              <HeaderText>SIGN-UP</HeaderText>
-              <SmallText>Create an account to continue!</SmallText>
-            </HeaderContainer>
-          )}
-          {current === "reset" && (
-            <HeaderContainer>
-              <HeaderText>PASSWORD</HeaderText>
-              <HeaderText>RESET</HeaderText>
-              <SmallText style={{ marginBottom: "0px" }}>
-                Reset your password in one click!
-              </SmallText>
-            </HeaderContainer>
-          )}
-        </TopContainer>
-        <InnerContainer>
-          <Routes>
-            <Route path="/*" element={<SignIn />} />
-            <Route path="signin/*" element={<SignIn />} />
-            <Route path="signup/*" element={<SignUp />} />
-            <Route path="reset/*" element={<ResetPassword />} />
-          </Routes>
-        </InnerContainer>
-      </BoxContainer>
+      <MainContainer>
+        <BoxContainer>
+          <TopContainer>
+            <BackDrop />
+            {current === "signin" && (
+              <HeaderContainer>
+                <HeaderText>LOGIN</HeaderText>
+                <SmallText>Please sign-in to continue!</SmallText>
+              </HeaderContainer>
+            )}
+            {current === "signup" && (
+              <HeaderContainer>
+                <HeaderText>SIGN-UP</HeaderText>
+                <SmallText>Create an account to continue!</SmallText>
+              </HeaderContainer>
+            )}
+            {current === "reset" && (
+              <HeaderContainer>
+                <HeaderText>PASSWORD</HeaderText>
+                <HeaderText>RESET</HeaderText>
+                <SmallText style={{ marginBottom: "0px" }}>
+                  Reset your password in one click!
+                </SmallText>
+              </HeaderContainer>
+            )}
+          </TopContainer>
+          <InnerContainer>
+            <Routes>
+              <Route path="/*" element={<SignIn />} />
+              <Route path="signin/*" element={<SignIn />} />
+              <Route path="signup/*" element={<SignUp />} />
+              <Route path="reset/*" element={<ResetPassword />} />
+            </Routes>
+          </InnerContainer>
+        </BoxContainer>
+      </MainContainer>
     </AuthContext.Provider>
   );
 };
