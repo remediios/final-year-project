@@ -4,6 +4,7 @@ import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -28,6 +29,7 @@ const Dashboard = () => {
 
   return (
     <>
+      <Sidebar />
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>

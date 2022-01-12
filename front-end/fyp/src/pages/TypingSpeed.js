@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
 import { Card, CardContent, Container, Button } from "@mui/material";
-import { Input } from "../styles/forms/Global";
+import { Input, MainContainer } from "../styles/forms/Global";
 import {
   HeaderText,
   MediumText,
@@ -116,79 +116,81 @@ const TypingSpeed = () => {
 
   return (
     <>
-      <Container style={{ textAlign: "center" }}>
-        <HeaderText style={{ color: "black", marginBottom: "10px" }}>
-          STEP 1
-        </HeaderText>
-        <MediumText style={{ marginBottom: "2px" }}>
-          Please go ahead and type as many words as you can within 1 minute!
-        </MediumText>
-        <MediumText
-          style={{ color: "black", marginTop: "0px", marginBottom: "30px" }}
+      <MainContainer>
+        <Container style={{ textAlign: "center" }}>
+          <HeaderText style={{ color: "black", marginBottom: "10px" }}>
+            STEP 1
+          </HeaderText>
+          <MediumText style={{ marginBottom: "2px" }}>
+            Please go ahead and type as many words as you can within 1 minute!
+          </MediumText>
+          <MediumText
+            style={{ color: "black", marginTop: "0px", marginBottom: "30px" }}
+          >
+            Results will be displayed at the end.
+          </MediumText>
+          <Timer>{countDown}</Timer>
+        </Container>
+        <Container
+          style={{ width: "50%", display: "flex", marginBottom: "30px" }}
         >
-          Results will be displayed at the end.
-        </MediumText>
-        <Timer>{countDown}</Timer>
-      </Container>
-      <Container
-        style={{ width: "50%", display: "flex", marginBottom: "30px" }}
-      >
-        <Input
-          disabled={status !== "started"}
-          ref={inputRef}
-          type="text"
-          placeholder="Start typing..."
-          style={{ borderRadius: "10px" }}
-          onKeyDown={handleKeyDown}
-          value={currentInput}
-          onChange={(e) => setCurrentInput(e.target.value)}
-        />
-        <Button
-          disabled={status === "started"}
-          variant="contained"
-          style={{ marginLeft: "10px", background: "rgb(24, 183, 214)" }}
-          onClick={startTimer}
-        >
-          Start
-        </Button>
-      </Container>
-      {status === "started" && (
-        <Container>
-          <Card sx={{ minWidth: 275, border: "1px solid " }}>
-            <CardContent>
-              {words.map((word, i) => (
-                <span key={i}>
-                  <span>
-                    {word.split("").map((char, index) => (
-                      <span
-                        style={getCharacterClass(i, index, char)}
-                        key={index}
-                      >
-                        {char}
-                      </span>
-                    ))}
+          <Input
+            disabled={status !== "started"}
+            ref={inputRef}
+            type="text"
+            placeholder="Start typing..."
+            style={{ borderRadius: "10px" }}
+            onKeyDown={handleKeyDown}
+            value={currentInput}
+            onChange={(e) => setCurrentInput(e.target.value)}
+          />
+          <Button
+            disabled={status === "started"}
+            variant="contained"
+            style={{ marginLeft: "10px", background: "rgb(24, 183, 214)" }}
+            onClick={startTimer}
+          >
+            Start
+          </Button>
+        </Container>
+        {status === "started" && (
+          <Container>
+            <Card sx={{ minWidth: 275, border: "1px solid " }}>
+              <CardContent>
+                {words.map((word, i) => (
+                  <span key={i}>
+                    <span>
+                      {word.split("").map((char, index) => (
+                        <span
+                          style={getCharacterClass(i, index, char)}
+                          key={index}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+                    <span> </span>
                   </span>
-                  <span> </span>
-                </span>
-              ))}
-            </CardContent>
-          </Card>
-        </Container>
-      )}
-      {status === "finished" && (
-        <Container style={{ textAlign: "center", display: "flex" }}>
-          <Container>
-            <StatsText>Words per minute (WPM) : </StatsText>
-            <StatsResultsText>{correct}</StatsResultsText>
+                ))}
+              </CardContent>
+            </Card>
           </Container>
-          <Container>
-            <StatsText>Accuracy : </StatsText>
-            <StatsResultsText>
-              {Math.round((correct / (correct + incorrect)) * 100)} %
-            </StatsResultsText>
+        )}
+        {status === "finished" && (
+          <Container style={{ textAlign: "center", display: "flex" }}>
+            <Container>
+              <StatsText>Words per minute (WPM) : </StatsText>
+              <StatsResultsText>{correct}</StatsResultsText>
+            </Container>
+            <Container>
+              <StatsText>Accuracy : </StatsText>
+              <StatsResultsText>
+                {Math.round((correct / (correct + incorrect)) * 100)} %
+              </StatsResultsText>
+            </Container>
           </Container>
-        </Container>
-      )}
+        )}
+      </MainContainer>
     </>
   );
 };
