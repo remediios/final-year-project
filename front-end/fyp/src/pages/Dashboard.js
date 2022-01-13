@@ -1,10 +1,10 @@
-import { Alert } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { Alert } from "@mui/material";
 import { Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar/Sidebar";
+import { PageTitle } from "../styles/texts/Global";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -30,21 +30,22 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar />
-      <Card>
+      <PageTitle>Dashboard</PageTitle>
+      {/* <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Profile</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <strong>Email:</strong> {currentUser.email}
-          {/* <Link to="/" className="btn btn-primary w-100 mt-3 ">
+          <Link to="/" className="btn btn-primary w-100 mt-3 ">
             Update Profile
-          </Link> */}
+          </Link>
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
         <Button variant="link" onClick={handleSignOut}>
           Sign-Out
         </Button>
-      </div>
+      </div> */}
     </>
   );
 };

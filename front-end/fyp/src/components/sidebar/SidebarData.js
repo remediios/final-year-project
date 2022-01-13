@@ -16,7 +16,7 @@ export const SidebarData = [
   {
     index: 2,
     title: "Section2",
-    path: "/dashboard",
+    path: "#",
     icon: <IoIcons.IoIosPaper />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -44,7 +44,7 @@ export const SidebarData = [
   {
     index: 4,
     title: "Profile",
-    path: "/dashboard",
+    path: "/dashboard/profile",
     icon: <MdIcons.MdAccountCircle />,
   },
 ];
