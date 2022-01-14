@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const SidebarLink = styled(Link)`
   display: flex;
-  color: #e1e9fc;
+  color: #fff;
   justify-content: space-between;
   align-items: center;
   padding: 20px;

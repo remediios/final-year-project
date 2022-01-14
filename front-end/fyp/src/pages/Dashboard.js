@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar/Sidebar";
 import { PageTitle } from "../styles/texts/Global";
+import { operatingSystem } from "../functions/bmetrics/userinfo";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -23,13 +24,14 @@ const Dashboard = () => {
 
   // FOR TESTING PURPOSES ONLY, REMOVE AFTER COMPLETED
   useEffect(() => {
-    console.log(currentUser);
+    console.log("CurrentUser", currentUser);
+    console.log("Operating System: ", operatingSystem());
     //eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <Sidebar />
+      <Sidebar user={currentUser} />
       <PageTitle>Dashboard</PageTitle>
       {/* <Card>
         <Card.Body>
