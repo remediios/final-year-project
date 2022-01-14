@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { SidebarData } from "./SidebarData";
@@ -10,19 +10,33 @@ import {
   SideBarIcon,
   SideBarNav,
   SidebarWrap,
+  AuthSignOutWrap,
   UserInfo,
   UsernameHeader,
+  AuthSignOutIcon,
+  AuthSignOutText,
 } from "../../styles/sidebar/Global";
 import profile from "../../img/profile.svg";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Sidebar = ({ user }) => {
   const [sidebar, setSidebar] = useState(false);
+  let navigate = useNavigate();
+  const { currentUser, signout } = useAuth();
+  const [error, setError] = useState("");
 
   const showSidebar = () => setSidebar(!sidebar);
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  const handleSignOut = async () => {
+    setError("");
+    try {
+      await signout();
+      navigate("/auth/signin");
+    } catch {
+      setError("Failed to log out");
+    }
+  };
 
   return (
     <>
@@ -32,7 +46,7 @@ const Sidebar = ({ user }) => {
         </SideBarIcon>
       </SideBar>
       <SideBarNav sidebar={sidebar}>
-        <SidebarWrap>
+        <SidebarWrap id="sidebar">
           <SideBarIcon to="#">
             <AiIcons.AiOutlineDoubleLeft onClick={showSidebar} />
           </SideBarIcon>
@@ -45,6 +59,12 @@ const Sidebar = ({ user }) => {
           {SidebarData.map((item, index) => {
             return <SubMenu item={item} key={index} index={index} />;
           })}
+          <AuthSignOutWrap>
+            <AuthSignOutIcon onClick={handleSignOut}>
+              <AiIcons.AiOutlinePoweroff />
+            </AuthSignOutIcon>
+            <AuthSignOutText onClick={handleSignOut}>Sign-Out</AuthSignOutText>
+          </AuthSignOutWrap>
         </SidebarWrap>
       </SideBarNav>
     </>

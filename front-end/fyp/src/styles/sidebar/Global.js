@@ -59,3 +59,37 @@ export const UsernameHeader = styled.h3`
   color: #fff;
   padding-top: 2px;
 `;
+
+export const AuthSignOutWrap = styled.div`
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  border-top: 1px solid white;
+  &:hover {
+  }
+`;
+
+export const AuthSignOutIcon = styled.div`
+  color: white;
+  font-size: 1.3rem;
+  &:hover {
+    color: #bf1d1d;
+    transition: all 0.1s ease-in;
+    cursor: pointer;
+  }
+`;
+
+export const AuthSignOutText = styled.p`
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  margin-left: 16px;
+  &:hover {
+    text-shadow: 2px 2px black;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+`;
