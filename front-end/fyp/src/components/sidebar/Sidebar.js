@@ -23,7 +23,7 @@ import { useAuth } from "../../contexts/AuthContext";
 const Sidebar = ({ user }) => {
   const [sidebar, setSidebar] = useState(false);
   let navigate = useNavigate();
-  const { currentUser, signout } = useAuth();
+  const { signout } = useAuth();
   const [error, setError] = useState("");
 
   const showSidebar = () => setSidebar(!sidebar);
