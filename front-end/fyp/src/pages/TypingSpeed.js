@@ -9,6 +9,7 @@ import {
   StatsText,
 } from "../styles/texts/Headings";
 import { Timer } from "../styles/texts/Global";
+import typing from "../img/typing.svg";
 
 const TypingSpeed = () => {
   const MAX_WORDS = 200;
@@ -189,6 +190,15 @@ const TypingSpeed = () => {
               </StatsResultsText>
             </Container>
           </Container>
+        )}
+        {status === "waiting" && (
+          <img
+            src={typing}
+            style={{
+              width: "300px",
+              marginTop: "30px",
+            }}
+          />
         )}
       </MainContainer>
     </>
