@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PageTitle = styled.h1`
   display: flex;
-  height: 90vh;
+  height: 80vh;
   align-items: center;
   justify-content: center;
   font-size: 3rem;
