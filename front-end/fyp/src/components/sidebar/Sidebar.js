@@ -24,6 +24,7 @@ const Sidebar = ({ user }) => {
   const [sidebar, setSidebar] = useState(false);
   let navigate = useNavigate();
   const { signout } = useAuth();
+  //eslint-disable-next-line
   const [error, setError] = useState("");
 
   const showSidebar = () => setSidebar(!sidebar);

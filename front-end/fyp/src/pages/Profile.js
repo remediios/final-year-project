@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useAuth } from "../contexts/AuthContext";
 import { UserInfo, UsernameHeader } from "../styles/profile/Global";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Profile = () => {
   const { currentUser } = useAuth();

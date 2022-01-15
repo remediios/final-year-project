@@ -194,6 +194,7 @@ const TypingSpeed = () => {
         {status === "waiting" && (
           <img
             src={typing}
+            alt="Typing speed"
             style={{
               width: "300px",
               marginTop: "30px",
