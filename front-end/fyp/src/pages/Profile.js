@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useAuth } from "../contexts/AuthContext";
 import { UserInfo, UsernameHeader } from "../styles/profile/Global";
+import { Link, Navigate } from "react-router-dom";
 
 const Profile = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    console.log("CurrentUser", currentUser);
+    console.log("PROFILE", currentUser);
     //eslint-disable-next-line
   }, []);
 
   return (
     <>
+      {!currentUser.emailVerified && <Navigate to="/dashboard" />}
       <Sidebar user={currentUser} />
       <UserInfo>
         <UsernameHeader>{currentUser.displayName}</UsernameHeader>

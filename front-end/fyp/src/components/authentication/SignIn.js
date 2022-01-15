@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 const SignIn = () => {
   let navigate = useNavigate();
   const { setCurrent } = useContext(AuthContext);
-  const { signin } = useAuth();
+  const { currentUser, signin } = useAuth();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");
@@ -30,7 +30,6 @@ const SignIn = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       setError("");
       setLoading(true);
