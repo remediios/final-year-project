@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const timer = new IdleTimer({
-      timeout: 10,
+      timeout: 600,
       onTimeout: async () => {
         setIsTimeout(true);
         await signout();
