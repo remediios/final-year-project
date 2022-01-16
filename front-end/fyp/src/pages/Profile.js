@@ -14,12 +14,10 @@ const Profile = () => {
 
   return (
     <>
-      {!currentUser.emailVerified && <Navigate to="/dashboard" />}
       <Sidebar user={currentUser} />
       <UserInfo>
         <UsernameHeader>{currentUser.displayName}</UsernameHeader>
       </UserInfo>
-
       {/* <Card>
         <Card.Body>
           {error && <Alert variant="danger">{error}</Alert>}
