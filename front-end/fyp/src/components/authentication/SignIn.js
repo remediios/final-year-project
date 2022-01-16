@@ -30,7 +30,6 @@ const SignIn = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       setError("");
       setLoading(true);

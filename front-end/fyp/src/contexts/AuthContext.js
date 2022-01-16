@@ -6,6 +6,7 @@ import {
   signOut,
   sendPasswordResetEmail,
   updateProfile,
+  sendEmailVerification,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import React, { createContext, useContext, useEffect, useState } from "react";
@@ -33,6 +34,8 @@ export function AuthProvider({ children }) {
           id: auth.currentUser.uid,
           username: auth.currentUser ? username : auth.currentUser.displayName,
           email: auth.currentUser.email,
+        }).then(() => {
+          sendEmailVerification(auth.currentUser);
         });
       });
   }
