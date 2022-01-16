@@ -7,35 +7,15 @@ import { Box, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { PageTitle } from "../styles/texts/Global";
 import { AuthVerifyAlert } from "../styles/dashboard/AuthRelated";
-import IdleTimer from "../classes/IdleTimer";
 
 const Dashboard = () => {
   const { currentUser, signout } = useAuth();
   const [alert, setAlert] = useState(true);
-  const [isTimeout, setIsTimeout] = useState(false);
 
   useEffect(() => {
     console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
     //eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
-    const timer = new IdleTimer({
-      timeout: 10,
-      onTimeout: async () => {
-        setIsTimeout(true);
-        await signout();
-      },
-      onExpired: () => {
-        setIsTimeout(true);
-        console.log("LOGOUT ACTIVATED");
-      },
-    });
-
-    return () => {
-      timer.cleanUp();
-    };
   }, []);
 
   return (
@@ -63,7 +43,7 @@ const Dashboard = () => {
           </Collapse>
         </Box>
       )}
-      <div>{isTimeout ? "Timeout" : "Active"}</div>
+
       <PageTitle>Dashboard</PageTitle>
     </>
   );
