@@ -9,7 +9,7 @@ import { PageTitle } from "../styles/texts/Global";
 import { AuthVerifyAlert } from "../styles/dashboard/AuthRelated";
 
 const Dashboard = () => {
-  const { currentUser, signout } = useAuth();
+  const { currentUser } = useAuth();
   const [alert, setAlert] = useState(true);
 
   useEffect(() => {

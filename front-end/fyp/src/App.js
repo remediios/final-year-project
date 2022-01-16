@@ -9,18 +9,18 @@ import IdleTimer from "./classes/IdleTimer";
 import { useAuth } from "./contexts/AuthContext";
 
 function App() {
-  const { currentUser, signout } = useAuth();
+  const { signout } = useAuth();
+  //eslint-disable-next-line
   const [isTimeout, setIsTimeout] = useState(false);
-
-  function refreshPage() {}
+  const [timeOut, setTimeOut] = useState(false);
 
   useEffect(() => {
     const timer = new IdleTimer({
-      timeout: 600,
+      timeout: 10,
       onTimeout: async () => {
         setIsTimeout(true);
         await signout();
-        window.location.reload(false);
+        setTimeOut(!timeOut);
       },
       onExpired: () => {
         setIsTimeout(true);
@@ -30,11 +30,11 @@ function App() {
     return () => {
       timer.cleanUp();
     };
-  }, []);
+    //eslint-disable-next-line
+  }, [timeOut]);
 
   return (
     <>
-      <div>{isTimeout ? "Timeout" : "Active"}</div>
       <Routes>
         <Route
           exact
