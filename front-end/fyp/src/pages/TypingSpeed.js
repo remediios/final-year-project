@@ -12,7 +12,7 @@ import { Timer } from "../styles/texts/Global";
 import typing from "../img/typing.svg";
 
 const TypingSpeed = () => {
-  const MAX_WORDS = 200;
+  const MAX_WORDS = 150;
   const SECONDS = 60;
   const [words, setWords] = useState([]);
   const [countDown, setCountDown] = useState(SECONDS);

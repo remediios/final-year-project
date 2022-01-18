@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import Sidebar from "../components/sidebar/Sidebar";
 //eslint-disable-next-line
 import { operatingSystem } from "../functions/bmetrics/userinfo";
 import { PageTitle } from "../styles/texts/Global";
 import EmailNotVerifiedAlert from "../components/authentication/EmailNotVerifiedAlert";
+import DashChart from "../components/dashboard/chart/DashChart";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -19,7 +20,8 @@ const Dashboard = () => {
     <>
       <Sidebar user={currentUser} />
       <EmailNotVerifiedAlert user={currentUser} />
-      <PageTitle>Dashboard</PageTitle>
+      {/* <PageTitle>Dashboard</PageTitle> */}
+      <DashChart />
     </>
   );
 };

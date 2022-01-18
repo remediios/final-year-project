@@ -30,6 +30,7 @@ function App() {
 
     return () => {
       timer.cleanUp();
+      //console.log("State change");
     };
     //eslint-disable-next-line
   }, [timeOut]);
