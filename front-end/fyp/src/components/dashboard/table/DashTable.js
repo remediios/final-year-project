@@ -29,6 +29,13 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
     //eslint-disable-next-line
   }, [currency]);
 
+  useEffect(() => {
+    const userSelectedCrypto = localStorage.getItem("selectedCrypto");
+    const userSelectedPage = localStorage.getItem("selectedPage");
+    setSelectedCoin(userSelectedCrypto);
+    setPage(userSelectedPage);
+  }, [selectedCoin]);
+
   return (
     <>
       <ContainerSidebar>
@@ -43,27 +50,33 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
             <SideTableBody>
               {coins.slice((page - 1) * 5, (page - 1) * 5 + 5).map((row) => {
                 return (
-                  <SideTableRow
-                    onClick={() => setSelectedCoin(row.id)}
-                    key={row.name}
-                  >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      style={{
-                        display: "table-caption",
-                        gap: 15,
-                        color: "black",
-                        cursor: "pointer",
-                        marginLeft: "10px",
+                  <>
+                    <SideTableRow
+                      selected={row.id === selectedCoin ? true : false}
+                      onClick={() => {
+                        setSelectedCoin(row.id);
+                        localStorage.setItem("selectedCrypto", row.id);
                       }}
+                      key={row.name}
                     >
-                      <img src={row?.image} alt={row.name} height="70" />
-                      <TextWrapper>
-                        <TextContent>{row.name}</TextContent>
-                      </TextWrapper>
-                    </TableCell>
-                  </SideTableRow>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={{
+                          display: "table-caption",
+                          gap: 15,
+                          color: "black",
+                          cursor: "pointer",
+                          marginLeft: "10px",
+                        }}
+                      >
+                        <img src={row?.image} alt={row.name} height="70" />
+                        <TextWrapper>
+                          <TextContent>{row.name}</TextContent>
+                        </TextWrapper>
+                      </TableCell>
+                    </SideTableRow>
+                  </>
                 );
               })}
             </SideTableBody>
@@ -74,6 +87,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
               siblingCount={0}
               onChange={(_, value) => {
                 setPage(value);
+                localStorage.setItem("selectedPage", value);
               }}
             />
           </>

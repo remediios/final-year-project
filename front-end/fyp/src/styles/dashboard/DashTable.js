@@ -6,6 +6,8 @@ export const SideTableBody = styled(TableBody)`
 `;
 
 export const SideTableRow = styled(TableRow)`
+  background-color: ${({ selected }) =>
+    selected ? "rgba(245, 245, 245)" : "white"};
   &:hover {
     background-color: rgba(245, 245, 245);
     transition: 0.3s all ease-in-out;
