@@ -10,8 +10,11 @@ import {
   ChartCointainer,
   ButtonWrapper,
   CrytoTitle,
+  DataSupplier,
+  ChartTitleWrapper,
 } from "../../../styles/dashboard/DashChart";
 import DashChartButtons from "../buttons/DashChartButtons";
+import datasuplier from "../../../img/datasuplier.png";
 
 const DashChart = ({ currency, selectedCoin }) => {
   const [historicalData, setHistoricalData] = useState();
@@ -42,7 +45,12 @@ const DashChart = ({ currency, selectedCoin }) => {
           />
         ) : (
           <>
-            <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
+            <ChartTitleWrapper>
+              <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
+              <a href="https://www.coingecko.com/en" target="_blank">
+                <DataSupplier src={datasuplier} href="www.google.com" />
+              </a>
+            </ChartTitleWrapper>
             <Line
               data={{
                 labels: historicalData.map((coin) => {
