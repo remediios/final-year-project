@@ -47,7 +47,11 @@ const DashChart = ({ currency, selectedCoin }) => {
           <>
             <ChartTitleWrapper>
               <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
-              <a href="https://www.coingecko.com/en" target="_blank">
+              <a
+                href="https://www.coingecko.com/en"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <DataSupplier src={datasuplier} href="www.google.com" />
               </a>
             </ChartTitleWrapper>

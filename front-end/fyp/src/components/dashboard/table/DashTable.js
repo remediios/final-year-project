@@ -34,6 +34,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
     const userSelectedPage = localStorage.getItem("selectedPage");
     setSelectedCoin(userSelectedCrypto);
     setPage(userSelectedPage);
+    //eslint-disable-next-line
   }, [selectedCoin]);
 
   return (
