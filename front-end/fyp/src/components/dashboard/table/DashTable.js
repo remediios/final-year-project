@@ -1,7 +1,6 @@
 import { Pagination, TableBody, TableCell, TableRow } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { CryptoList } from "../../../config/chart/api";
 import { ContainerSidebar } from "../../../styles/dashboard/Global";
 
@@ -26,7 +25,7 @@ const DashTable = () => {
   return (
     <>
       <ContainerSidebar>
-        <TableBody>
+        <TableBody style={{ marginTop: "30px" }}>
           {coins.slice((page - 1) * 5, (page - 1) * 5 + 5).map((row) => {
             return (
               <TableRow onClick={() => console.log(row.id)} key={row.name}>
