@@ -6,7 +6,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Line } from "react-chartjs-2";
 // eslint-disable-next-line
 import Chart from "chart.js/auto";
-import { ChartCointainer } from "../../../styles/dashboard/DashChart";
+import {
+  ChartCointainer,
+  ButtonWrapper,
+} from "../../../styles/dashboard/DashChart";
 import DashChartButtons from "../buttons/DashChartButtons";
 
 const DashChart = () => {
@@ -21,6 +24,7 @@ const DashChart = () => {
 
   useEffect(() => {
     fetchHistoricalData();
+    //eslint-disable-next-line
   }, [days]);
 
   return (
@@ -60,14 +64,7 @@ const DashChart = () => {
                 },
               }}
             />
-            <div
-              style={{
-                display: "flex",
-                marginTop: 20,
-                justifyContent: "space-around",
-                width: "100%",
-              }}
-            >
+            <ButtonWrapper>
               {buttonOptions.map((day) => (
                 <DashChartButtons
                   key={day.value}
@@ -77,7 +74,7 @@ const DashChart = () => {
                   {day.label}
                 </DashChartButtons>
               ))}
-            </div>
+            </ButtonWrapper>
           </>
         )}
       </ChartCointainer>

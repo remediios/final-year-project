@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../../styles/dashboard/DashChartButtons";
+import { Button } from "../../../styles/dashboard/DashChart";
 
 const DashChartButtons = ({ children, selected, onClick }) => {
   return (
