@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import Sidebar from "../components/sidebar/Sidebar";
 //eslint-disable-next-line
@@ -10,6 +10,8 @@ import DashTable from "../components/dashboard/table/DashTable";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
+  const [selectedCoin, setSelectedCoin] = useState("bitcoin");
+  const currency = "GBP";
 
   useEffect(() => {
     //console.log("DASHBOARD", currentUser);
@@ -22,8 +24,12 @@ const Dashboard = () => {
       <Sidebar user={currentUser} />
       <EmailNotVerifiedAlert user={currentUser} />
       <Container>
-        <DashTable />
-        <DashChart />
+        <DashTable
+          currency={currency}
+          selectedCoin={selectedCoin}
+          setSelectedCoin={setSelectedCoin}
+        />
+        <DashChart currency={currency} selectedCoin={selectedCoin} />
       </Container>
     </>
   );

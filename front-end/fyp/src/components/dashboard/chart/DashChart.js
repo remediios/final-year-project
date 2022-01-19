@@ -9,23 +9,30 @@ import Chart from "chart.js/auto";
 import {
   ChartCointainer,
   ButtonWrapper,
+  CrytoTitle,
+  DataSupplier,
+  ChartTitleWrapper,
 } from "../../../styles/dashboard/DashChart";
 import DashChartButtons from "../buttons/DashChartButtons";
+import datasuplier from "../../../img/datasuplier.png";
 
-const DashChart = () => {
+const DashChart = ({ currency, selectedCoin }) => {
   const [historicalData, setHistoricalData] = useState();
+  //eslint-disable-next-line
+  const [loading, setLoading] = useState(false);
   const [days, setDays] = useState(1);
-  const currency = "GBP";
 
   const fetchHistoricalData = async () => {
-    const { data } = await axios.get(CryptoChart("bitcoin", days, currency));
+    setLoading(true);
+    const { data } = await axios.get(CryptoChart(selectedCoin, days, currency));
     setHistoricalData(data.prices);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchHistoricalData();
     //eslint-disable-next-line
-  }, [days]);
+  }, [days, selectedCoin]);
 
   return (
     <>
@@ -34,10 +41,20 @@ const DashChart = () => {
           <CircularProgress
             style={{ color: "rgba(36, 44, 92)" }}
             size={100}
-            thickness={1}
+            thickness={2}
           />
         ) : (
           <>
+            <ChartTitleWrapper>
+              <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
+              <a
+                href="https://www.coingecko.com/en"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <DataSupplier src={datasuplier} href="www.google.com" />
+              </a>
+            </ChartTitleWrapper>
             <Line
               data={{
                 labels: historicalData.map((coin) => {
@@ -53,6 +70,7 @@ const DashChart = () => {
                     data: historicalData.map((coin) => coin[1]),
                     label: `Price (Past ${days} Days) in ${currency} £`,
                     borderColor: "rgba(36, 44, 92)",
+                    backgroundColor: "white",
                   },
                 ],
               }}

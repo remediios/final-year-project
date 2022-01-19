@@ -49,3 +49,20 @@ export const Button = styled.button`
     transition: 0.2s all ease-in-out;
   }
 `;
+
+export const ChartTitleWrapper = styled.div`
+  width: 100%;
+  margin: 0;
+`;
+export const CrytoTitle = styled.h3`
+  margin: 0 auto;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+`;
+
+export const DataSupplier = styled.img`
+  margin: 0 auto;
+  width: 80px;
+  float: right;
+`;
