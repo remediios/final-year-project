@@ -6,4 +6,5 @@ export const AuthVerifyAlert = styled(Alert)`
   margin: auto;
   margin-top: 1rem;
   justify-content: center;
+  text-align: center;
 `;

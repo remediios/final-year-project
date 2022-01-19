@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import { useEffect, useState } from "react";
 import IdleTimer from "./classes/IdleTimer";
 import { useAuth } from "./contexts/AuthContext";
+import PrivateEmailVerified from "./components/routes/PrivateEmailVerified";
 
 function App() {
   const { signout } = useAuth();
@@ -16,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const timer = new IdleTimer({
-      timeout: 600,
+      timeout: 300,
       onTimeout: async () => {
         setIsTimeout(true);
         await signout();
@@ -29,6 +30,7 @@ function App() {
 
     return () => {
       timer.cleanUp();
+      //console.log("State change");
     };
     //eslint-disable-next-line
   }, [timeOut]);
@@ -59,7 +61,9 @@ function App() {
           path="/dashboard/profile"
           element={
             <PrivateRoute>
-              <Profile />
+              <PrivateEmailVerified>
+                <Profile />
+              </PrivateEmailVerified>
             </PrivateRoute>
           }
         />

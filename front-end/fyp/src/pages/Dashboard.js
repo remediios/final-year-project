@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import Sidebar from "../components/sidebar/Sidebar";
 //eslint-disable-next-line
 import { operatingSystem } from "../functions/bmetrics/userinfo";
-import { Box, Collapse, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import { PageTitle } from "../styles/texts/Global";
-import { AuthVerifyAlert } from "../styles/dashboard/AuthRelated";
+import EmailNotVerifiedAlert from "../components/authentication/EmailNotVerifiedAlert";
+import DashChart from "../components/dashboard/chart/DashChart";
+import { Container } from "../styles/dashboard/Global";
+import DashTable from "../components/dashboard/table/DashTable";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
-  const [alert, setAlert] = useState(true);
 
   useEffect(() => {
-    console.log("DASHBOARD", currentUser);
+    //console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
     //eslint-disable-next-line
   }, []);
@@ -21,43 +20,13 @@ const Dashboard = () => {
   return (
     <>
       <Sidebar user={currentUser} />
-      {!currentUser.emailVerified && (
-        <Box sx={{ width: "100%" }}>
-          <Collapse in={alert}>
-            <AuthVerifyAlert
-              severity="info"
-              action={
-                <IconButton
-                  size="small"
-                  onClick={() => {
-                    setAlert(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
-            >
-              Please verify your account! Check your email inbox for further
-              instructions!
-            </AuthVerifyAlert>
-          </Collapse>
-        </Box>
-      )}
-
-      <PageTitle>Dashboard</PageTitle>
+      <EmailNotVerifiedAlert user={currentUser} />
+      <Container>
+        <DashTable />
+        <DashChart />
+      </Container>
     </>
   );
 };
 
 export default Dashboard;
-
-// <AuthVerifyAlert
-//   severity="info"
-//   size="small"
-//   onClose={() => {
-//     console.log("test");
-//   }}
-// >
-//   Please verify your account! Check your inbox for further
-//   instructions
-// </AuthVerifyAlert>;

@@ -6,7 +6,6 @@ import SubMenu from "./SubMenu";
 import {
   ProfileImgWrap,
   ProfilePicture,
-  SideBar,
   SideBarIcon,
   SideBarNav,
   SidebarWrap,
@@ -19,6 +18,7 @@ import {
 import profile from "../../img/profile.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { NavBar, NavBarIcon } from "../../styles/navbar/Global";
 
 const Sidebar = ({ user }) => {
   const [sidebar, setSidebar] = useState(false);
@@ -41,11 +41,11 @@ const Sidebar = ({ user }) => {
 
   return (
     <>
-      <SideBar>
-        <SideBarIcon to="#">
+      <NavBar>
+        <NavBarIcon to="#">
           <FaIcons.FaBars onClick={showSidebar} />
-        </SideBarIcon>
-      </SideBar>
+        </NavBarIcon>
+      </NavBar>
       <SideBarNav sidebar={sidebar}>
         <SidebarWrap id="sidebar">
           <SideBarIcon to="#">
