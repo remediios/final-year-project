@@ -1,16 +1,15 @@
 import styled from "styled-components";
-import { Pagination, TableBody, TableCell } from "@mui/material";
+import { Pagination, TableBody, TableRow } from "@mui/material";
 
 export const SideTableBody = styled(TableBody)`
   margin-top: 30px;
 `;
 
-export const SideTableCell = styled(TableCell)`
-  display: table-caption;
-  gap: 15;
-  color: black;
-  cursor: pointer;
-  margin-left: 100px;
+export const SideTableRow = styled(TableRow)`
+  &:hover {
+    background-color: rgba(245, 245, 245);
+    transition: 0.3s all ease-in-out;
+  }
 `;
 
 export const TextWrapper = styled.div`

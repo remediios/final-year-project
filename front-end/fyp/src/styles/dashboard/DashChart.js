@@ -49,3 +49,7 @@ export const Button = styled.button`
     transition: 0.2s all ease-in-out;
   }
 `;
+
+export const CrytoTitle = styled.div`
+  margin-bottom: 5px;
+`;

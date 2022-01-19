@@ -1,11 +1,11 @@
-import { CircularProgress, TableCell, TableRow } from "@mui/material";
+import { CircularProgress, TableCell } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CryptoList } from "../../../config/chart/api";
-import { useDash } from "../../../contexts/DashContext";
 import {
   SidePagination,
   SideTableBody,
+  SideTableRow,
   TextContent,
   TextWrapper,
 } from "../../../styles/dashboard/DashTable";
@@ -13,6 +13,7 @@ import { ContainerSidebar } from "../../../styles/dashboard/Global";
 
 const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [coins, setCoins] = useState();
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -42,7 +43,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
             <SideTableBody>
               {coins.slice((page - 1) * 5, (page - 1) * 5 + 5).map((row) => {
                 return (
-                  <TableRow
+                  <SideTableRow
                     onClick={() => setSelectedCoin(row.id)}
                     key={row.name}
                   >
@@ -62,7 +63,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                         <TextContent>{row.name}</TextContent>
                       </TextWrapper>
                     </TableCell>
-                  </TableRow>
+                  </SideTableRow>
                 );
               })}
             </SideTableBody>

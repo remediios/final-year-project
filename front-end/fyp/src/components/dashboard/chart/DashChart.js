@@ -9,11 +9,13 @@ import Chart from "chart.js/auto";
 import {
   ChartCointainer,
   ButtonWrapper,
+  CrytoTitle,
 } from "../../../styles/dashboard/DashChart";
 import DashChartButtons from "../buttons/DashChartButtons";
 
 const DashChart = ({ currency, selectedCoin }) => {
   const [historicalData, setHistoricalData] = useState();
+  //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [days, setDays] = useState(1);
 
@@ -40,6 +42,7 @@ const DashChart = ({ currency, selectedCoin }) => {
           />
         ) : (
           <>
+            <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
             <Line
               data={{
                 labels: historicalData.map((coin) => {
@@ -55,6 +58,7 @@ const DashChart = ({ currency, selectedCoin }) => {
                     data: historicalData.map((coin) => coin[1]),
                     label: `Price (Past ${days} Days) in ${currency} £`,
                     borderColor: "rgba(36, 44, 92)",
+                    backgroundColor: "white",
                   },
                 ],
               }}
