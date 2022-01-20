@@ -16,6 +16,14 @@ const Dashboard = () => {
   useEffect(() => {
     //console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
+
+    const userSelectedCrypto = localStorage.getItem("selectedCrypto");
+    const userSelectedPage = localStorage.getItem("selectedPage");
+    if (userSelectedCrypto === undefined || userSelectedCrypto === null) {
+      localStorage.setItem("selectedCrypto", selectedCoin);
+    } else if (userSelectedPage === undefined || userSelectedPage === null) {
+      localStorage.setItem("selectedPage", 1);
+    }
     //eslint-disable-next-line
   }, []);
 
