@@ -7,10 +7,12 @@ import EmailNotVerifiedAlert from "../components/authentication/EmailNotVerified
 import DashChart from "../components/dashboard/chart/DashChart";
 import { Container } from "../styles/dashboard/Global";
 import DashTable from "../components/dashboard/table/DashTable";
+import DashInfo from "../components/dashboard/info/DashInfo";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
+  const [cryptoInfo, setCryptoInfo] = useState(false);
   const currency = "GBP";
 
   useEffect(() => {
@@ -37,7 +39,19 @@ const Dashboard = () => {
           selectedCoin={selectedCoin}
           setSelectedCoin={setSelectedCoin}
         />
-        <DashChart currency={currency} selectedCoin={selectedCoin} />
+        {cryptoInfo ? (
+          <DashInfo
+            currency={currency}
+            selectedCoin={selectedCoin}
+            setCryptoInfo={setCryptoInfo}
+          />
+        ) : (
+          <DashChart
+            currency={currency}
+            selectedCoin={selectedCoin}
+            setCryptoInfo={setCryptoInfo}
+          />
+        )}
       </Container>
     </>
   );
