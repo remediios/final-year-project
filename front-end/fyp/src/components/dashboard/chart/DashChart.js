@@ -16,7 +16,7 @@ import {
 import DashChartButtons from "../buttons/DashChartButtons";
 import datasuplier from "../../../img/datasuplier.png";
 
-const DashChart = ({ currency, selectedCoin }) => {
+const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
   const [historicalData, setHistoricalData] = useState();
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
@@ -46,7 +46,10 @@ const DashChart = ({ currency, selectedCoin }) => {
         ) : (
           <>
             <ChartTitleWrapper>
-              <CrytoTitle>{selectedCoin.toUpperCase()}</CrytoTitle>
+              <CrytoTitle onClick={() => setCryptoInfo(true)}>
+                {selectedCoin.toUpperCase()}
+              </CrytoTitle>
+
               <a
                 href="https://www.coingecko.com/en"
                 target="_blank"

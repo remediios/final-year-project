@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ChartCointainer = styled.div`
-  width: 75%;
+  width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,7 +38,6 @@ export const Button = styled.button`
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  cursor: pointer;
   background-color: ${({ selected }) =>
     selected ? "rgba(36, 44, 92)" : "white"};
   color: ${({ selected }) => (selected ? "white" : "")};
@@ -47,6 +46,7 @@ export const Button = styled.button`
     background-color: rgba(36, 44, 92);
     color: white;
     transition: 0.2s all ease-in-out;
+    cursor: pointer;
   }
 `;
 
@@ -59,6 +59,11 @@ export const CrytoTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   text-align: center;
+  width: 30%;
+  &:hover {
+    cursor: pointer;
+    font-weight: 500;
+  }
 `;
 
 export const DataSupplier = styled.img`
