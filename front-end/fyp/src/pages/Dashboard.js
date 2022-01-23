@@ -16,7 +16,7 @@ const Dashboard = () => {
   const currency = "GBP";
 
   useEffect(() => {
-    //console.log("DASHBOARD", currentUser);
+    console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
 
     const userSelectedCrypto = localStorage.getItem("selectedCrypto");
