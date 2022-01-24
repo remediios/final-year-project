@@ -1,10 +1,15 @@
 package miguelremedios.fyp.user;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-
+@Entity
+@Table
 public class User {
 
+    @Id
+    @SequenceGenerator(name="user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     private Long id;
     private String userId;
     private String email;
