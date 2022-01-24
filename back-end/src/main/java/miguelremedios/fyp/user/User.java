@@ -3,24 +3,30 @@ package miguelremedios.fyp.user;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table
+@Entity(name = "User")
+@Table(name="`user`", uniqueConstraints = {@UniqueConstraint(name = "userId_unique", columnNames = "userId")})
 public class User {
 
     @Id
     @SequenceGenerator(name="user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @Column(name = "id", updatable = false)
     private Long id;
+    @Column(name = "userId", unique=true, length = 28)
     private String userId;
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "username", nullable = false)
     private String userName;
-    private Timestamp createdAt;
-    private Timestamp lastLoginAt;
+    @Column(name = "createdat", nullable = false)
+    private String createdAt;
+    @Column(name = "lastloginat", nullable = false)
+    private String lastLoginAt;
 
     public User() {
     }
 
-    public User(Long id, String userId, String email, String userName, Timestamp createdAt, Timestamp lastLoginAt) {
+    public User(Long id, String userId, String email, String userName, String createdAt, String lastLoginAt) {
         this.id = id;
         this.userId = userId;
         this.email = email;
@@ -29,7 +35,7 @@ public class User {
         this.lastLoginAt = lastLoginAt;
     }
 
-    public User(String userId, String email, String userName, Timestamp createdAt, Timestamp lastLoginAt) {
+    public User(String userId, String email, String userName, String createdAt, String lastLoginAt) {
         this.userId = userId;
         this.email = email;
         this.userName = userName;
@@ -69,19 +75,19 @@ public class User {
         this.userName = userName;
     }
 
-    public Timestamp getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getLastLoginAt() {
+    public String getLastLoginAt() {
         return lastLoginAt;
     }
 
-    public void setLastLoginAt(Timestamp lastLoginAt) {
+    public void setLastLoginAt(String lastLoginAt) {
         this.lastLoginAt = lastLoginAt;
     }
 

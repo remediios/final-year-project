@@ -13,7 +13,7 @@ public class UserService {
         return List.of(new User(1L,"VOER1SzcREPKP5xrW4RpyIqr7TY2",
                 "miguelremady@gmail.com",
                 "MiguelRemedios",
-                new Timestamp(date.getTime()),
-                new Timestamp(date.getTime())));
+                "",
+                ""));
     }
 }
