@@ -16,11 +16,11 @@ public class User {
     private String userId;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "username", nullable = false)
+    @Column(name = "userName", nullable = false)
     private String userName;
-    @Column(name = "createdat", nullable = false)
+    @Column(name = "createdAt", nullable = false)
     private String createdAt;
-    @Column(name = "lastloginat", nullable = false)
+    @Column(name = "lastLoginAt", nullable = false)
     private String lastLoginAt;
 
     public User() {
