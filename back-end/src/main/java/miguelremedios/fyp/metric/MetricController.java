@@ -26,4 +26,18 @@ public class MetricController {
         metricService.addNewMetric(metric);
         return "Metric registered successfully!";
     }
+
+    @DeleteMapping(path = "{id}")
+    public String deleteMetric(@PathVariable("id") Long id) {
+        metricService.deleteMetric(id);
+        return "Metric deleted successfully!";
+    }
+
+    @PutMapping(path = "{id}")
+    public String updateMetric(@PathVariable("id") Long metricId,
+                             @RequestParam(required = false) String metricType,
+                             @RequestParam(required = false) String metricDescription) {
+        metricService.updateMetric(metricId, metricType, metricDescription);
+        return "Metric updated successfully!";
+    }
 }
