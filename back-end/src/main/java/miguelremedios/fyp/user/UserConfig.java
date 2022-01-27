@@ -8,9 +8,8 @@ import java.util.List;
 
 @Configuration
 public class UserConfig {
-
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository repository) {
+    CommandLineRunner UserCommandLineRunner(UserRepository repository) {
         return args -> {
             User user1 = new User(
                 "11asd",
