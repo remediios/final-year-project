@@ -17,7 +17,7 @@ public class MetricController {
     }
 
     @GetMapping
-    public List<Metric> metrics() {
+    public List<Metric> getMetrics() {
         return metricService.getMetrics();
     }
 

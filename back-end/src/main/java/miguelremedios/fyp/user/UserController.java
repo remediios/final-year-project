@@ -35,12 +35,12 @@ public class UserController {
 
     @PutMapping(path = "{id}")
     public String updateUser(@PathVariable("id") Long id,
-                             @RequestParam(required = false) String userId,
+                             @RequestParam(required = false) String userStringId,
                              @RequestParam(required = false) String userEmail,
                              @RequestParam(required = false) String userName,
                              @RequestParam(required = false) String userCreatedAt,
                              @RequestParam(required = false) String userLastLoginAt) {
-        userService.updateUser(id, userId, userEmail, userName, userCreatedAt, userLastLoginAt);
+        userService.updateUser(id, userStringId, userEmail, userName, userCreatedAt, userLastLoginAt);
         return "User updated successfully!";
     }
 }

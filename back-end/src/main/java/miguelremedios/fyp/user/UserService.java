@@ -39,19 +39,19 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(Long id, String userId, String userEmail, String userName, String userCreatedAt, String userLastLoginAt) {
+    public void updateUser(Long id, String userStringId, String userEmail, String userName, String userCreatedAt, String userLastLoginAt) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException("ID " + id + " does not exist!"));
 
-        if (userId != null &&
-                userId.length() > 0 &&
-                !Objects.equals(user.getUserId(), userId)) { //If provided ID is not the same as the current one established
+        if (userStringId != null &&
+                userStringId.length() > 0 &&
+                !Objects.equals(user.getStringId(), userStringId)) { //If provided ID is not the same as the current one established
 
-            Optional<User> userIdOptional = userRepository.findUserById(userId);
+            Optional<User> userIdOptional = userRepository.findUserById(userStringId);
             if (userIdOptional.isPresent()) {
                 throw new IllegalStateException("User ID already registered!");
             }
-            user.setUserId(userId);
+            user.setStringId(userStringId);
         }
 
         if (userEmail != null &&

@@ -1,10 +1,9 @@
 package miguelremedios.fyp.user;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity(name = "User")
-@Table(name="`user`", uniqueConstraints = {@UniqueConstraint(name = "userId_unique", columnNames = "userId")})
+@Table(name="`user`", uniqueConstraints = {@UniqueConstraint(name = "string_id_unique", columnNames = "string_id")})
 public class User {
 
     @Id
@@ -12,31 +11,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "userId", unique=true, length = 28)
-    private String userId;
+    @Column(name = "string_id", unique = true, length = 28)
+    private String stringId;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "userName", nullable = false)
+    @Column(name = "username", nullable = false)
     private String userName;
-    @Column(name = "createdAt", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private String createdAt;
-    @Column(name = "lastLoginAt", nullable = false)
+    @Column(name = "last_login_at", nullable = false)
     private String lastLoginAt;
 
     public User() {
     }
 
-    public User(Long id, String userId, String email, String userName, String createdAt, String lastLoginAt) {
-        this.id = id;
-        this.userId = userId;
-        this.email = email;
-        this.userName = userName;
-        this.createdAt = createdAt;
-        this.lastLoginAt = lastLoginAt;
-    }
-
-    public User(String userId, String email, String userName, String createdAt, String lastLoginAt) {
-        this.userId = userId;
+    public User(String stringId, String email, String userName, String createdAt, String lastLoginAt) {
+        this.stringId = stringId;
         this.email = email;
         this.userName = userName;
         this.createdAt = createdAt;
@@ -51,12 +41,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getStringId() {
+        return stringId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setStringId(String userId) {
+        this.stringId = userId;
     }
 
     public String getEmail() {
@@ -95,7 +85,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userId=" + userId +
+                ", userId=" + stringId +
                 ", email='" + email + '\'' +
                 ", userName='" + userName + '\'' +
                 ", createdAt=" + createdAt +

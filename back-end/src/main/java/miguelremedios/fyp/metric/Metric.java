@@ -3,7 +3,7 @@ package miguelremedios.fyp.metric;
 import javax.persistence.*;
 
 @Entity(name = "Metric")
-@Table(name = "metric")
+@Table(name = "metric", uniqueConstraints = {@UniqueConstraint(name = "type_unique", columnNames = "type")})
 public class Metric {
 
     @Id
@@ -11,18 +11,12 @@ public class Metric {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "metric_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "type", nullable = false)
+    @Column(name = "type", unique = true, nullable = false)
     private String type;
     @Column(name = "description", nullable = false)
     private String description;
 
     public Metric() {
-    }
-
-    public Metric(Long id, String type, String description) {
-        this.id = id;
-        this.type = type;
-        this.description = description;
     }
 
     public Metric(String type, String description) {
