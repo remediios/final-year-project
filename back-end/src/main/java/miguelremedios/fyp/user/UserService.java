@@ -2,8 +2,11 @@ package miguelremedios.fyp.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Objects;
 
 @Service
 public class UserService {
@@ -25,5 +28,59 @@ public class UserService {
             throw new IllegalStateException("User already registered!");
         }
         userRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        boolean exists = userRepository.existsById(id);
+        if(!exists) {
+            throw new IllegalStateException("ID " + id + " does not exist!");
+        }
+        userRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void updateUser(Long id, String userStringId, String userEmail, String userName, String userCreatedAt, String userLastLoginAt) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("ID " + id + " does not exist!"));
+
+        if (userStringId != null &&
+                userStringId.length() > 0 &&
+                !Objects.equals(user.getStringId(), userStringId)) { //If provided ID is not the same as the current one established
+
+            Optional<User> userIdOptional = userRepository.findUserById(userStringId);
+            if (userIdOptional.isPresent()) {
+                throw new IllegalStateException("User ID already registered!");
+            }
+            user.setStringId(userStringId);
+        }
+
+        if (userEmail != null &&
+                userEmail.length() > 0 &&
+                !Objects.equals(user.getEmail(), userEmail)) { //If provided email is not the same as the current one established
+
+            Optional<User> userOptional = userRepository.findUserByEmail(userEmail);
+            if (userOptional.isPresent()) {
+                throw new IllegalStateException("User Email already registered!");
+            }
+            user.setEmail(userEmail);
+        }
+
+        if (userName != null &&
+                userName.length() > 0 &&
+                !Objects.equals(user.getUserName(), userName)) { //If provided userName is not the same as the current one established
+            user.setUserName(userName);
+        }
+
+        if (userCreatedAt != null &&
+                userCreatedAt.length() > 0 &&
+                !Objects.equals(user.getCreatedAt(), userCreatedAt)) { //If provided userCreatedAt is not the same as the current one established
+            user.setCreatedAt(userCreatedAt);
+        }
+
+        if (userLastLoginAt != null &&
+                userLastLoginAt.length() > 0 &&
+                !Objects.equals(user.getLastLoginAt(), userLastLoginAt)) { //If provided userLastLoginAt is not the same as the current one established
+            user.setLastLoginAt(userLastLoginAt);
+        }
     }
 }
