@@ -22,6 +22,14 @@ public class UserMetricService {
         return userMetricRepository.findAll();
     }
 
+    public List<UserMetric> getUserById(Integer userId) {
+        return userMetricRepository.findByUserId(userId);
+    }
+
+    public List<UserMetric> getUserByMetric(Integer metricId) {
+        return userMetricRepository.findByUserMetric(metricId);
+    }
+
     public void addNewUserMetric(UserMetric userMetric) {
         userMetricRepository.save(userMetric);
     }
