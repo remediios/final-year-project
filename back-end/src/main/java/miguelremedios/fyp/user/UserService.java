@@ -22,6 +22,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public Optional<User> getUserByStringID(String stringId) {
+        return userRepository.findUserById(stringId);
+    }
+
+
+    public Optional<User> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
     public void addNewUser(User user) {
         Optional<User> userEmail = userRepository.findUserByEmail(user.getEmail());
         if (userEmail.isPresent()) {
