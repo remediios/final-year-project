@@ -32,7 +32,6 @@ public class UserMetricController {
         return userMetricService.getUserByMetric(metricId);
     }
 
-
     @PostMapping
     public String registerUserMetric(@RequestBody UserMetric userMetric) {
         userMetricService.addNewUserMetric(userMetric);
