@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path="api/metrics")
+@CrossOrigin(origins = "*")
 public class MetricController {
 
     private final MetricService metricService;
