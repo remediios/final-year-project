@@ -8,6 +8,7 @@ import DashChart from "../components/dashboard/chart/DashChart";
 import { Container } from "../styles/dashboard/Global";
 import DashTable from "../components/dashboard/table/DashTable";
 import DashInfo from "../components/dashboard/info/DashInfo";
+import UserBehaviour from "../components/dashboard/behaviour/UserBehaviour";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -18,7 +19,6 @@ const Dashboard = () => {
   useEffect(() => {
     console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
-
     const userSelectedCrypto = localStorage.getItem("selectedCrypto");
     const userSelectedPage = localStorage.getItem("selectedPage");
     if (userSelectedCrypto === undefined || userSelectedCrypto === null) {
@@ -33,6 +33,7 @@ const Dashboard = () => {
     <>
       <Sidebar user={currentUser} />
       <EmailNotVerifiedAlert user={currentUser} />
+      <UserBehaviour />
       <Container>
         <DashTable
           currency={currency}
