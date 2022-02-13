@@ -8,8 +8,19 @@ export function useDash() {
 
 export function DashProvider({ children }) {
   const [userTraining, setUserTraining] = useState(false);
+  const [timer, setTimer] = useState(10);
   const [keysPressed, setKeysPressed] = useState(1);
-  const value = { userTraining, keysPressed, setKeysPressed };
+  const [totalClicks, setTotalClicks] = useState(0);
+  const value = {
+    totalClicks,
+    setTotalClicks,
+    userTraining,
+    setUserTraining,
+    keysPressed,
+    setKeysPressed,
+    timer,
+    setTimer,
+  };
 
   return <DashContext.Provider value={value}>{children}</DashContext.Provider>;
 }

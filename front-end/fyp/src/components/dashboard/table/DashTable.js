@@ -31,7 +31,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const handleKeyDown = (e) => {
     const keyCode = e.keyCode;
     const input = searchCoinRef.current.value;
-    if (input === "" && keyCode == 8) {
+    if (input === "" && keyCode === 8) {
       return;
     } else {
       setKeysPressed(keysPressed + 1);
