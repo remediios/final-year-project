@@ -2,6 +2,7 @@ import { CircularProgress, TableCell, TextField } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { CryptoList } from "../../../config/chart/api";
+import { useDash } from "../../../contexts/DashContext";
 import {
   SidePagination,
   SideTableBody,
@@ -18,11 +19,20 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
+  const { keysPressed, setKeysPressed } = useDash();
+
   const fetchCoins = async () => {
     setLoading(true);
     const { data } = await axios.get(CryptoList(currency));
     setCoins(data);
     setLoading(false);
+  };
+
+  const handleKeyDown = (e) => {
+    // const key = e.key.toLowerCase();
+    // const keyCode = e.keyCode;
+    setKeysPressed(keysPressed + 1);
+    console.log(keysPressed);
   };
 
   useEffect(() => {
@@ -65,6 +75,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                 width: "60%",
               }}
               onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={(e) => handleKeyDown(e)}
             />
             <SideTableBody>
               {handleSearch()
