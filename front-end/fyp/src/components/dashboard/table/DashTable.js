@@ -1,6 +1,6 @@
 import { CircularProgress, TableCell, TextField } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CryptoList } from "../../../config/chart/api";
 import { useDash } from "../../../contexts/DashContext";
 import {
@@ -18,8 +18,8 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-
-  const { keysPressed, setKeysPressed } = useDash();
+  const searchCoinRef = useRef();
+  const { userTraining, keysPressed, setKeysPressed } = useDash();
 
   const fetchCoins = async () => {
     setLoading(true);
@@ -29,10 +29,13 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   };
 
   const handleKeyDown = (e) => {
-    // const key = e.key.toLowerCase();
-    // const keyCode = e.keyCode;
-    setKeysPressed(keysPressed + 1);
-    console.log(keysPressed);
+    const input = searchCoinRef.current.value;
+    if (input === "") {
+      setKeysPressed(keysPressed);
+    } else {
+      setKeysPressed(keysPressed + 1);
+    }
+    console.log(keysPressed, input);
   };
 
   useEffect(() => {
@@ -76,6 +79,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
               }}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => handleKeyDown(e)}
+              inputRef={searchCoinRef}
             />
             <SideTableBody>
               {handleSearch()
