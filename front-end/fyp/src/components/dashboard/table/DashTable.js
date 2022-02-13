@@ -29,13 +29,14 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   };
 
   const handleKeyDown = (e) => {
+    const keyCode = e.keyCode;
     const input = searchCoinRef.current.value;
-    if (input === "") {
-      setKeysPressed(keysPressed);
+    if (input === "" && keyCode == 8) {
+      return;
     } else {
       setKeysPressed(keysPressed + 1);
     }
-    console.log(keysPressed, input);
+    console.log(keysPressed, keyCode);
   };
 
   useEffect(() => {
