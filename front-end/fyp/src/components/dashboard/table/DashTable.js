@@ -18,14 +18,9 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [accessedCoins, setAccessedCoins] = useState([]);
   const searchCoinRef = useRef();
-  const {
-    userTraining,
-    keysPressed,
-    setKeysPressed,
-    coinsVisited,
-    setCoinsVisited,
-  } = useDash();
+  const { userTraining, keysPressed, setKeysPressed } = useDash();
 
   const fetchCoins = async () => {
     setLoading(true);
@@ -55,7 +50,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
     const userSelectedPage = localStorage.getItem("selectedPage");
     setSelectedCoin(userSelectedCrypto);
     setPage(userSelectedPage);
-    console.log("Coins Visited: " + coinsVisited);
+    console.log("Coins Visited: " + accessedCoins.length);
     //eslint-disable-next-line
   }, [selectedCoin]);
 
@@ -105,7 +100,12 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                           setSelectedCoin(row.id);
                           localStorage.setItem("selectedCrypto", row.id);
                           if (userTraining) {
-                            setCoinsVisited(coinsVisited + 1);
+                            if (!accessedCoins.includes(row.id)) {
+                              setAccessedCoins((oldArray) => [
+                                ...oldArray,
+                                row.id,
+                              ]);
+                            }
                           }
                         }}
                         key={row.name}
