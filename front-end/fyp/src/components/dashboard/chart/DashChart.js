@@ -39,8 +39,8 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
 
   useEffect(() => {
     fetchHistoricalData();
-    console.log("Button clicks: " + totalButtonClicks);
-    console.log("Coin Page Views: " + coinPageViews);
+    // console.log("Button clicks: " + totalButtonClicks);
+    // console.log("Coin Page Views: " + coinPageViews);
     //eslint-disable-next-line
   }, [days, selectedCoin]);
 

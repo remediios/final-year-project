@@ -10,6 +10,6 @@ export function clickEvent(setTotalClicks) {
   container.addEventListener("click", function () {
     clicks += 1;
     setTotalClicks(clicks);
-    console.log("DOM clicks: " + clicks);
+    // console.log("DOM clicks: " + clicks);
   });
 }

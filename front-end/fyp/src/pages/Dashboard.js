@@ -15,19 +15,30 @@ import { clickEvent } from "../functions/global/global";
 const Dashboard = () => {
   const { currentUser } = useAuth();
   const {
-    totalClicks,
-    setTotalClicks,
+    userTraining,
     timer,
     setKeysPressed,
-    userTraining,
+    setTotalClicks,
     setTotalButtonClicks,
+    setCoinPageViews,
+    setCoinsAccessed,
+    setAccessedCoins,
+    keysPressed,
+    totalClicks,
+    totalButtonClicks,
+    coinPageViews,
+    coinsAccessed,
+    userBehaviour,
+    setUserBehaviour,
+    setTimer,
   } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
   const [cryptoInfo, setCryptoInfo] = useState(false);
   const currency = "GBP";
+  const [status, setStatus] = useState("waiting");
 
   useEffect(() => {
-    console.log("DASHBOARD", currentUser);
+    // console.log("DASHBOARD", currentUser);
     //console.log("Operating System: ", operatingSystem());
     const userSelectedCrypto = localStorage.getItem("selectedCrypto");
     const userSelectedPage = localStorage.getItem("selectedPage");
@@ -39,17 +50,50 @@ const Dashboard = () => {
     //eslint-disable-next-line
   }, []);
 
+  const startDataRetrievalTimer = () => {
+    if (status === "started") {
+      setStatus("started");
+      let interval = setInterval(() => {
+        setTimer((prevCountDown) => {
+          if (prevCountDown === 0) {
+            clearInterval(interval);
+            setStatus("finished");
+            return 10;
+          } else {
+            return prevCountDown - 1;
+          }
+        });
+      }, 1000);
+    }
+  };
+
   useEffect(() => {
     if (userTraining) {
-      if (timer > 0) clickEvent(setTotalClicks, totalClicks);
-      else {
+      setStatus("started");
+      if (status === "started") {
+        clickEvent(setTotalClicks);
+        startDataRetrievalTimer();
+      } else if (status === "finished") {
+        setUserBehaviour({
+          ...userBehaviour,
+          ks_kpt: keysPressed,
+          md_ct: totalClicks,
+          md_cvt: coinsAccessed,
+          md_bct: totalButtonClicks,
+          dom_pv: coinPageViews,
+          ks_ts: 0,
+          user_status: 0,
+        });
         setKeysPressed(0);
         setTotalClicks(0);
         setTotalButtonClicks(0);
+        setCoinPageViews(0);
+        setCoinsAccessed(0);
+        setAccessedCoins([]);
       }
     }
     //eslint-disable-next-line
-  }, []);
+  }, [status]);
 
   return (
     <>
