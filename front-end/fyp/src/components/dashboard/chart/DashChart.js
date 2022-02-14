@@ -15,12 +15,20 @@ import {
 } from "../../../styles/dashboard/DashChart";
 import DashChartButtons from "../buttons/DashChartButtons";
 import datasuplier from "../../../img/datasuplier.png";
+import { useDash } from "../../../contexts/DashContext";
 
 const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
   const [historicalData, setHistoricalData] = useState();
   //eslint-disable-next-line
   const [loading, setLoading] = useState(false);
   const [days, setDays] = useState(1);
+  const {
+    userTraining,
+    totalButtonClicks,
+    setTotalButtonClicks,
+    coinPageViews,
+    setCoinPageViews,
+  } = useDash();
 
   const fetchHistoricalData = async () => {
     setLoading(true);
@@ -31,6 +39,8 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
 
   useEffect(() => {
     fetchHistoricalData();
+    console.log("Button clicks: " + totalButtonClicks);
+    console.log("Coin Page Views: " + coinPageViews);
     //eslint-disable-next-line
   }, [days, selectedCoin]);
 
@@ -46,7 +56,14 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
         ) : (
           <>
             <ChartTitleWrapper>
-              <CrytoTitle onClick={() => setCryptoInfo(true)}>
+              <CrytoTitle
+                onClick={() => {
+                  setCryptoInfo(true);
+                  if (userTraining) {
+                    setCoinPageViews(coinPageViews + 1);
+                  }
+                }}
+              >
                 {selectedCoin.toUpperCase()}
               </CrytoTitle>
 
@@ -89,7 +106,12 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
               {buttonOptions.map((day) => (
                 <DashChartButtons
                   key={day.value}
-                  onClick={() => setDays(day.value)}
+                  onClick={() => {
+                    setDays(day.value);
+                    if (userTraining) {
+                      setTotalButtonClicks(totalButtonClicks + 1);
+                    }
+                  }}
                   selected={day.value === days}
                 >
                   {day.label}

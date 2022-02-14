@@ -19,7 +19,13 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const searchCoinRef = useRef();
-  const { userTraining, keysPressed, setKeysPressed } = useDash();
+  const {
+    userTraining,
+    keysPressed,
+    setKeysPressed,
+    coinsVisited,
+    setCoinsVisited,
+  } = useDash();
 
   const fetchCoins = async () => {
     setLoading(true);
@@ -49,6 +55,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
     const userSelectedPage = localStorage.getItem("selectedPage");
     setSelectedCoin(userSelectedCrypto);
     setPage(userSelectedPage);
+    console.log("Coins Visited: " + coinsVisited);
     //eslint-disable-next-line
   }, [selectedCoin]);
 
@@ -79,7 +86,11 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                 width: "60%",
               }}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => handleKeyDown(e)}
+              onKeyDown={(e) => {
+                if (userTraining) {
+                  handleKeyDown(e);
+                } else return;
+              }}
               inputRef={searchCoinRef}
             />
             <SideTableBody>
@@ -93,6 +104,9 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                         onClick={() => {
                           setSelectedCoin(row.id);
                           localStorage.setItem("selectedCrypto", row.id);
+                          if (userTraining) {
+                            setCoinsVisited(coinsVisited + 1);
+                          }
                         }}
                         key={row.name}
                       >

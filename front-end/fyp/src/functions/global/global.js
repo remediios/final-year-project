@@ -4,12 +4,12 @@ export function scrollTo(destination) {
   });
 }
 
-export function clickEvent(setTotalClicks, totalClicks) {
+export function clickEvent(setTotalClicks) {
   let container = document.getElementById("dashContainer");
   let clicks = 0;
   container.addEventListener("click", function () {
     clicks += 1;
     setTotalClicks(clicks);
-    console.log(clicks);
+    console.log("DOM clicks: " + clicks);
   });
 }

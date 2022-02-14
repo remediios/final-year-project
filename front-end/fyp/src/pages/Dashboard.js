@@ -10,12 +10,18 @@ import DashTable from "../components/dashboard/table/DashTable";
 import DashInfo from "../components/dashboard/info/DashInfo";
 import UserBehaviour from "../components/dashboard/behaviour/UserBehaviour";
 import { useDash } from "../contexts/DashContext";
-import Events from "../classes/Events";
 import { clickEvent } from "../functions/global/global";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
-  const { totalClicks, setTotalClicks, timer, setKeysPressed } = useDash();
+  const {
+    totalClicks,
+    setTotalClicks,
+    timer,
+    setKeysPressed,
+    userTraining,
+    setTotalButtonClicks,
+  } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
   const [cryptoInfo, setCryptoInfo] = useState(false);
   const currency = "GBP";
@@ -34,11 +40,15 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (timer > 0) clickEvent(setTotalClicks, totalClicks);
-    else {
-      setKeysPressed(0);
-      setTotalClicks(0);
+    if (userTraining) {
+      if (timer > 0) clickEvent(setTotalClicks, totalClicks);
+      else {
+        setKeysPressed(0);
+        setTotalClicks(0);
+        setTotalButtonClicks(0);
+      }
     }
+    //eslint-disable-next-line
   }, []);
 
   return (
