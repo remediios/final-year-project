@@ -8,3 +8,11 @@ export const AuthVerifyAlert = styled(Alert)`
   justify-content: center;
   text-align: center;
 `;
+
+export const TrainingModeAlert = styled(Alert)`
+  width: 40%;
+  margin: auto;
+  margin-top: 1rem;
+  justify-content: center;
+  text-align: center;
+`;

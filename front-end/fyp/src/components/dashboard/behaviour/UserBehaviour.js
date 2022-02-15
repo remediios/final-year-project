@@ -3,7 +3,7 @@ import axios from "axios";
 import { useDash } from "../../../contexts/DashContext";
 
 const UserBehaviour = () => {
-  const [userData, setUserData] = useState([]);
+  const [buffer, setBuffer] = useState([]);
   const { userBehaviour } = useDash();
   // const fetchTest = async () => {
   //   const { data } = await axios.get("http://localhost:8080/api/user/metrics");
@@ -17,9 +17,8 @@ const UserBehaviour = () => {
   // }, []);
 
   useEffect(() => {
-    userData.push(userBehaviour);
-    console.log(userData);
-    console.log("Behaviour activated");
+    buffer.push(userBehaviour);
+    console.log("Buffer updated", buffer);
   }, [userBehaviour]);
 
   return <></>;

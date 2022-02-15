@@ -11,12 +11,13 @@ import DashInfo from "../components/dashboard/info/DashInfo";
 import UserBehaviour from "../components/dashboard/behaviour/UserBehaviour";
 import { useDash } from "../contexts/DashContext";
 import { clickEvent } from "../functions/global/global";
+import UserTrainingAlert from "../components/dashboard/behaviour/UserTrainingAlert";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
   const {
     userTraining,
-    timer,
+    setUserTraining,
     setKeysPressed,
     setTotalClicks,
     setTotalButtonClicks,
@@ -31,6 +32,10 @@ const Dashboard = () => {
     userBehaviour,
     setUserBehaviour,
     setTimer,
+    SERVER_SEND_TIME,
+    TRAINING_TIME,
+    timerTraining,
+    setTimerTraining,
   } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
   const [cryptoInfo, setCryptoInfo] = useState(false);
@@ -58,13 +63,31 @@ const Dashboard = () => {
           if (prevCountDown === 0) {
             clearInterval(interval);
             setStatus("finished");
-            return 10;
+            return SERVER_SEND_TIME;
           } else {
             return prevCountDown - 1;
           }
         });
       }, 1000);
     }
+  };
+
+  const startTrainingTimer = () => {
+    let interval = setInterval(() => {
+      setTimerTraining((prevCountDown) => {
+        if (prevCountDown === 0) {
+          clearInterval(interval);
+          return TRAINING_TIME;
+        } else {
+          return prevCountDown - 1;
+        }
+      });
+    }, 1000);
+  };
+
+  const handleTrainingMode = () => {
+    setUserTraining(true);
+    // startTrainingTimer()
   };
 
   useEffect(() => {
@@ -92,14 +115,24 @@ const Dashboard = () => {
         setAccessedCoins([]);
       }
     }
+    console.log(timerTraining);
     //eslint-disable-next-line
   }, [status]);
 
   return (
     <>
       <Sidebar user={currentUser} />
+      <button
+        disabled={userTraining ? true : false}
+        style={{ marginLeft: "10px", width: "30px", fontSize: "8px" }}
+        onClick={handleTrainingMode}
+      >
+        TM
+      </button>
       <EmailNotVerifiedAlert user={currentUser} />
+      <UserTrainingAlert training={userTraining} />
       <UserBehaviour />
+
       <Container id="dashContainer">
         <DashTable
           currency={currency}

@@ -24,7 +24,6 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
     keysPressed,
     setKeysPressed,
     setCoinsAccessed,
-    coinsAccessed,
     accessedCoins,
     setAccessedCoins,
   } = useDash();

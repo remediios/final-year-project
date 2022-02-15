@@ -7,8 +7,11 @@ export function useDash() {
 }
 
 export function DashProvider({ children }) {
-  const [userTraining, setUserTraining] = useState(true);
-  const [timer, setTimer] = useState(10);
+  const TRAINING_TIME = 300;
+  const SERVER_SEND_TIME = 30;
+  const [userTraining, setUserTraining] = useState(false);
+  const [timer, setTimer] = useState(SERVER_SEND_TIME);
+  const [timerTraining, setTimerTraining] = useState(TRAINING_TIME);
   const [userBehaviour, setUserBehaviour] = useState({
     ks_kpt: 0,
     md_ct: 0,
@@ -44,6 +47,10 @@ export function DashProvider({ children }) {
     setCoinsAccessed,
     accessedCoins,
     setAccessedCoins,
+    timerTraining,
+    setTimerTraining,
+    SERVER_SEND_TIME,
+    TRAINING_TIME,
   };
 
   return <DashContext.Provider value={value}>{children}</DashContext.Provider>;
