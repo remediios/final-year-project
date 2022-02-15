@@ -10,7 +10,7 @@ export const AuthVerifyAlert = styled(Alert)`
 `;
 
 export const TrainingModeAlert = styled(Alert)`
-  width: 40%;
+  width: 24%;
   margin: auto;
   margin-top: 1rem;
   justify-content: center;

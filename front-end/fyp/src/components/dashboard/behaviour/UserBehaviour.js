@@ -4,7 +4,7 @@ import { useDash } from "../../../contexts/DashContext";
 
 const UserBehaviour = () => {
   const [buffer, setBuffer] = useState([]);
-  const { userBehaviour } = useDash();
+  const { userBehaviour, userTraining } = useDash();
   // const fetchTest = async () => {
   //   const { data } = await axios.get("http://localhost:8080/api/user/metrics");
   //   setUserData(data);
@@ -17,8 +17,12 @@ const UserBehaviour = () => {
   // }, []);
 
   useEffect(() => {
-    buffer.push(userBehaviour);
-    console.log("Buffer updated", buffer);
+    if (userTraining) {
+      buffer.push(userBehaviour);
+      console.log("Buffer updated", buffer);
+    } else {
+      setBuffer([]);
+    }
   }, [userBehaviour]);
 
   return <></>;

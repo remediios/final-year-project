@@ -7,8 +7,8 @@ export function useDash() {
 }
 
 export function DashProvider({ children }) {
-  const TRAINING_TIME = 300;
-  const SERVER_SEND_TIME = 30;
+  const TRAINING_TIME = 34;
+  const SERVER_SEND_TIME = 10;
   const [userTraining, setUserTraining] = useState(false);
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
   const [timerTraining, setTimerTraining] = useState(TRAINING_TIME);

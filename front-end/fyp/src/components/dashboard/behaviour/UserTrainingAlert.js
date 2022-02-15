@@ -11,7 +11,7 @@ const UserTrainingAlert = ({ training }) => {
         <Box sx={{ width: "100%" }}>
           <Collapse in={alert}>
             <TrainingModeAlert
-              severity="info"
+              severity="error"
               action={
                 <IconButton
                   size="small"
@@ -23,7 +23,7 @@ const UserTrainingAlert = ({ training }) => {
                 </IconButton>
               }
             >
-              TRAINING MODE : ON
+              TRAINING MODE
             </TrainingModeAlert>
           </Collapse>
         </Box>

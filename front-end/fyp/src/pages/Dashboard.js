@@ -41,6 +41,7 @@ const Dashboard = () => {
   const [cryptoInfo, setCryptoInfo] = useState(false);
   const currency = "GBP";
   const [status, setStatus] = useState("waiting");
+  const [trainingStatus, setTrainingStatus] = useState(false);
 
   useEffect(() => {
     // console.log("DASHBOARD", currentUser);
@@ -77,6 +78,18 @@ const Dashboard = () => {
       setTimerTraining((prevCountDown) => {
         if (prevCountDown === 0) {
           clearInterval(interval);
+          setUserTraining(false);
+          setTrainingStatus(false);
+          setUserBehaviour({
+            ks_kpt: 0,
+            md_ct: 0,
+            md_cvt: 0,
+            md_bct: 0,
+            dom_pv: 0,
+            ks_ts: 0,
+            user_status: 0,
+          });
+          console.log("Training: OFF");
           return TRAINING_TIME;
         } else {
           return prevCountDown - 1;
@@ -87,15 +100,24 @@ const Dashboard = () => {
 
   const handleTrainingMode = () => {
     setUserTraining(true);
-    // startTrainingTimer()
+    setTrainingStatus(true);
+    startTrainingTimer();
   };
+
+  useEffect(() => {
+    if (userTraining) {
+      setTrainingStatus(true);
+      // startTrainingTimer();
+      console.log("Training: ON");
+    }
+  }, [userTraining]);
 
   useEffect(() => {
     if (userTraining) {
       setStatus("started");
       if (status === "started") {
-        clickEvent(setTotalClicks);
         startDataRetrievalTimer();
+        clickEvent(setTotalClicks);
       } else if (status === "finished") {
         setUserBehaviour({
           ...userBehaviour,
@@ -115,16 +137,20 @@ const Dashboard = () => {
         setAccessedCoins([]);
       }
     }
-    console.log(timerTraining);
     //eslint-disable-next-line
-  }, [status]);
+  }, [status, trainingStatus]);
 
   return (
     <>
       <Sidebar user={currentUser} />
       <button
         disabled={userTraining ? true : false}
-        style={{ marginLeft: "10px", width: "30px", fontSize: "8px" }}
+        style={{
+          marginLeft: "10px",
+          width: "30px",
+          fontSize: "8px",
+          display: userTraining ? "none" : "block",
+        }}
         onClick={handleTrainingMode}
       >
         TM
