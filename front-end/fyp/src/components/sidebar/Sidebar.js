@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavBar, NavBarIcon } from "../../styles/navbar/Global";
 
-const Sidebar = ({ user }) => {
+const Sidebar = ({ user, trainingFunction }) => {
   const [sidebar, setSidebar] = useState(false);
   let navigate = useNavigate();
   const { signout } = useAuth();
@@ -58,7 +58,14 @@ const Sidebar = ({ user }) => {
             <UsernameHeader>{user.displayName}</UsernameHeader>
           </UserInfo>
           {SidebarData.map((item, index) => {
-            return <SubMenu item={item} key={index} index={index} />;
+            return (
+              <SubMenu
+                item={item}
+                key={index}
+                index={index}
+                trainingFunction={trainingFunction}
+              />
+            );
           })}
           <AuthSignOutWrap>
             <AuthSignOutIcon onClick={handleSignOut}>

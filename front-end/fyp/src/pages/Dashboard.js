@@ -34,7 +34,6 @@ const Dashboard = () => {
     setTimer,
     SERVER_SEND_TIME,
     TRAINING_TIME,
-    timerTraining,
     setTimerTraining,
   } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
@@ -142,19 +141,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Sidebar user={currentUser} />
-      <button
-        disabled={userTraining ? true : false}
-        style={{
-          marginLeft: "10px",
-          width: "30px",
-          fontSize: "8px",
-          display: userTraining ? "none" : "block",
-        }}
-        onClick={handleTrainingMode}
-      >
-        TM
-      </button>
+      <Sidebar user={currentUser} trainingFunction={handleTrainingMode} />
       <EmailNotVerifiedAlert user={currentUser} />
       <UserTrainingAlert training={userTraining} />
       <UserBehaviour />
