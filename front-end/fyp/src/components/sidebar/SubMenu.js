@@ -6,7 +6,7 @@ import {
   SidebarSubText,
 } from "../../styles/sidebar/SubMenu";
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, trainingFunction }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
 
@@ -28,10 +28,20 @@ const SubMenu = ({ item }) => {
       {subnav &&
         item.subNav.map((item, index) => {
           return (
-            <DropdownLink to={item.path} key={index}>
-              {item.icon}
-              <SidebarSubText>{item.title}</SidebarSubText>
-            </DropdownLink>
+            <>
+              <DropdownLink
+                to={item.path}
+                key={index}
+                onClick={() => {
+                  if (item.index === 31) {
+                    trainingFunction();
+                  }
+                }}
+              >
+                {item.icon}
+                <SidebarSubText>{item.title}</SidebarSubText>
+              </DropdownLink>
+            </>
           );
         })}
     </>

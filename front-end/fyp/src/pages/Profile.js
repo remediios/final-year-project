@@ -19,7 +19,7 @@ const Profile = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    console.log("PROFILE", currentUser);
+    // console.log("PROFILE", currentUser);
     //eslint-disable-next-line
   }, []);
 

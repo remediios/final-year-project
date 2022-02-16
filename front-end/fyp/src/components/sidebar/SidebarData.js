@@ -13,45 +13,27 @@ export const SidebarData = [
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
   },
-
-  /**
-   * For future improvements purposes, the sidebar is capable of
-   * containing sub-menus, this feature is well-implemented and
-   * only needs to be added as the following example demonstrates
-   */
-
-  // {
-  //   index: 2,
-  //   title: "Section2",
-  //   path: "#",
-  //   icon: <IoIcons.IoIosPaper />,
-  //   iconClosed: <RiIcons.RiArrowDownSFill />,
-  //   iconOpened: <RiIcons.RiArrowUpSFill />,
-  //   subNav: [
-  //     {
-  //       title: "Sub Section 1",
-  //       path: "/dashboard",
-  //       icon: <IoIcons.IoIosPaper />,
-  //       className: "sub-nav",
-  //     },
-  //     {
-  //       title: "Sub Section 2",
-  //       path: "/dashboard",
-  //       icon: <IoIcons.IoIosPaper />,
-  //       className: "sub-nav",
-  //     },
-  //   ],
-  // },
-  // {
-  //   index: 3,
-  //   title: "Section3",
-  //   path: "/dashboard",
-  //   icon: <IoIcons.IoIosPaper />,
-  // },
   {
-    index: 4,
+    index: 2,
     title: "Profile",
     path: "/dashboard/profile",
     icon: <MdIcons.MdAccountCircle />,
+  },
+  {
+    index: 3,
+    title: "Admin Access",
+    path: "#",
+    icon: <IoIcons.IoIosPaper />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        index: 31,
+        title: "Training Mode",
+        path: "#",
+        icon: <IoIcons.IoIosPaper />,
+        className: "sub-nav",
+      },
+    ],
   },
 ];
