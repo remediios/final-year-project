@@ -48,12 +48,12 @@ export const BackDrop = styled.div`
   transform: rotate(60deg);
   top: -290px;
   left: -70px;
-  background: rgb(2, 0, 36);
+  background: rgb(36, 44, 92);
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(39, 60, 117, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
+    rgba(39, 60, 117, 1) 40%,
+    rgb(36, 44, 92) 100%
   );
 `;
 
@@ -116,7 +116,7 @@ export const MutedLink = styled.a`
 
 export const BoldLink = styled.a`
   font-size: 11px;
-  color: rgb(24, 183, 214);
+  color: rgb(61, 74, 153);
   font-weight: 500;
   text-decoration: none;
   margin: 0 4px;
@@ -139,7 +139,7 @@ export const Input = styled.input`
   }
   &:focus {
     outline: none;
-    border-bottom: 2px solid rgb(0, 213, 255);
+    border-bottom: 2px solid rgb(36, 44, 92);
   }
 `;
 
@@ -153,10 +153,10 @@ export const SubmitButton = styled.button`
   border-radius: 100px 100px 100px 100px;
   cursor: pointer;
   transition: all, 240ms ease-in-out;
-  background: rgb(24, 183, 214);
+  background: rgb(36, 44, 92);
 
   &:hover {
-    background-color: rgb(0, 213, 255);
+    background-color: rgb(61, 74, 153);
   }
 `;
 
