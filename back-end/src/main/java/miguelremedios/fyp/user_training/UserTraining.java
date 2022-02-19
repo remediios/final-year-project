@@ -10,7 +10,7 @@ public class UserTraining {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_training_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "string_id", unique = true, length = 28)
+    @Column(name = "string_id", length = 28)
     private String stringId;
     @Column(name = "ks_kpt", nullable = false)
     private Integer ks_kpt;
