@@ -13,13 +13,14 @@ export function DashProvider({ children }) {
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
   const [timerTraining, setTimerTraining] = useState(TRAINING_TIME);
   const [userBehaviour, setUserBehaviour] = useState({
+    stringId: "",
     ks_kpt: 0,
     md_ct: 0,
     md_cvt: 0,
     md_bct: 0,
     dom_pv: 0,
     ks_ts: 0,
-    user_status: 0,
+    user_status: 1,
   });
   const [keysPressed, setKeysPressed] = useState(0);
   const [totalClicks, setTotalClicks] = useState(0);

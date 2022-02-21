@@ -80,6 +80,7 @@ const Dashboard = () => {
           setUserTraining(false);
           setTrainingStatus(false);
           setUserBehaviour({
+            stringId: currentUser.uid,
             ks_kpt: 0,
             md_ct: 0,
             md_cvt: 0,
@@ -120,13 +121,14 @@ const Dashboard = () => {
       } else if (status === "finished") {
         setUserBehaviour({
           ...userBehaviour,
+          stringId: currentUser.uid,
           ks_kpt: keysPressed,
           md_ct: totalClicks,
           md_cvt: coinsAccessed,
           md_bct: totalButtonClicks,
           dom_pv: coinPageViews,
           ks_ts: 0,
-          user_status: 0,
+          user_status: 1,
         });
         setKeysPressed(0);
         setTotalClicks(0);
@@ -145,7 +147,6 @@ const Dashboard = () => {
       <EmailNotVerifiedAlert user={currentUser} />
       <UserTrainingAlert training={userTraining} />
       <UserBehaviour />
-
       <Container id="dashContainer">
         <DashTable
           currency={currency}
