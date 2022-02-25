@@ -7,9 +7,11 @@ export function scrollTo(destination) {
 export function clickEvent(setTotalClicks) {
   let container = document.getElementById("dashContainer");
   let clicks = 0;
-  container.addEventListener("click", function () {
+
+  function handleClicks() {
     clicks += 1;
     setTotalClicks(clicks);
     // console.log("DOM clicks: " + clicks);
-  });
+  }
+  container.addEventListener("click", handleClicks);
 }
