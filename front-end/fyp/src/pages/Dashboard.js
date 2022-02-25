@@ -128,7 +128,7 @@ const Dashboard = () => {
           md_bct: totalButtonClicks,
           dom_pv: coinPageViews,
           ks_ts: 0,
-          user_status: 1,
+          user_status: 0,
         });
         setKeysPressed(0);
         setTotalClicks(0);
