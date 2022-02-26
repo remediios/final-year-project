@@ -11,10 +11,6 @@ dataset = pd.read_csv("dataset.csv")
 dataset.drop('id', axis=1, inplace=True)
 
 # set inputs and outputs
-# Dataset without correct dependent variable values
-x = dataset.drop('user_status', axis=1)
-
-# set inputs and outputs
 #Dataset without correct dependent variable values
 x = dataset.drop('user_status',axis = 1)
 #Dependent variable values
