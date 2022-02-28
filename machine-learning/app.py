@@ -10,7 +10,7 @@ CORS(app)
 model = pickle.load(open("model.pkl", "rb"))
 
 @app.route('/')
-def hello_world():
+def get_status():
     return 'FLASK API RUNNING!'
 
 

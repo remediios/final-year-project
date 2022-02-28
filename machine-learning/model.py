@@ -21,7 +21,7 @@ scaler = StandardScaler()
 data_scaled = scaler.fit_transform(x)
 df_scaled = pd.DataFrame(data_scaled)
 
-X_train, X_test, y_train, y_test = train_test_split(data_scaled, y, test_size=0.30, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.30, random_state=42)
 
 # LR model
 model = LogisticRegression(C=0.1, max_iter=500)
