@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import Sidebar from "../components/sidebar/Sidebar";
-//eslint-disable-next-line
-import { operatingSystem } from "../functions/bmetrics/userinfo";
 import EmailNotVerifiedAlert from "../components/authentication/EmailNotVerifiedAlert";
 import DashChart from "../components/dashboard/chart/DashChart";
 import { Container } from "../styles/dashboard/Global";
@@ -12,6 +10,7 @@ import UserBehaviour from "../components/dashboard/behaviour/UserBehaviour";
 import { useDash } from "../contexts/DashContext";
 import { clickEvent } from "../functions/global/global";
 import UserTrainingAlert from "../components/dashboard/behaviour/UserTrainingAlert";
+import ContinuousAuthentication from "../components/dashboard/continuous auth/ContinuousAuthentication";
 
 const Dashboard = () => {
   const { currentUser } = useAuth();
@@ -128,7 +127,7 @@ const Dashboard = () => {
           md_bct: totalButtonClicks,
           dom_pv: coinPageViews,
           ks_ts: 0,
-          user_status: 0,
+          user_status: 1,
         });
         setKeysPressed(0);
         setTotalClicks(0);
@@ -147,6 +146,7 @@ const Dashboard = () => {
       <EmailNotVerifiedAlert user={currentUser} />
       <UserTrainingAlert training={userTraining} />
       <UserBehaviour />
+      <ContinuousAuthentication />
       <Container id="dashContainer">
         <DashTable
           currency={currency}
