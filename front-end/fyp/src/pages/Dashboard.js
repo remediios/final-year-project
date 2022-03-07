@@ -34,6 +34,7 @@ const Dashboard = () => {
     SERVER_SEND_TIME,
     TRAINING_TIME,
     setTimerTraining,
+    setContinuousAuthentication,
   } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
   const [cryptoInfo, setCryptoInfo] = useState(false);
@@ -42,8 +43,6 @@ const Dashboard = () => {
   const [trainingStatus, setTrainingStatus] = useState(false);
 
   useEffect(() => {
-    // console.log("DASHBOARD", currentUser);
-    //console.log("Operating System: ", operatingSystem());
     const userSelectedCrypto = localStorage.getItem("selectedCrypto");
     const userSelectedPage = localStorage.getItem("selectedPage");
     if (userSelectedCrypto === undefined || userSelectedCrypto === null) {
@@ -51,6 +50,8 @@ const Dashboard = () => {
     } else if (userSelectedPage === undefined || userSelectedPage === null) {
       localStorage.setItem("selectedPage", 1);
     }
+    //Change boolean value if CA is intended to be turned off.
+    setContinuousAuthentication(true);
     //eslint-disable-next-line
   }, []);
 
