@@ -1,17 +1,10 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Modal,
-  Select,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Box, Button, Modal, TextField, Typography } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthContext";
 import { useDash } from "../../../contexts/DashContext";
+import { questions } from "../../../config/security/questions";
+import { getRandomInt } from "../../../functions/global/global";
 
 const style = {
   position: "absolute",
@@ -26,22 +19,27 @@ const style = {
 };
 
 const AlertModal = ({ open, handleClose, setError }) => {
-  const [response, setResponse] = React.useState("");
+  const [response, setResponse] = useState("");
+  const [question, setQuestion] = useState(0);
   const { setContinuousAuthentication } = useDash();
   const { signout } = useAuth();
   let navigate = useNavigate();
+  const responseRef = useRef();
+
   const handleChange = (event) => {
     setResponse(event.target.value);
   };
 
-  const handleSubmit = async () => {
-    if (response === "red") {
-      console.log("Correct Answer");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (response.length === 0) {
+      return;
+    }
+
+    if (response === questions[question].answer) {
       handleClose();
       setContinuousAuthentication(true);
-      // navigate("/dashboard");
     } else {
-      console.log("Incorrect Answer");
       try {
         await signout();
         navigate("/auth/signin");
@@ -51,6 +49,13 @@ const AlertModal = ({ open, handleClose, setError }) => {
     }
   };
 
+  useEffect(() => {
+    let min = 0;
+    let max = questions.length - 1;
+    const number = getRandomInt(min, max);
+    setQuestion(number);
+  }, []);
+
   return (
     <div>
       <Modal
@@ -58,7 +63,13 @@ const AlertModal = ({ open, handleClose, setError }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box
+          sx={style}
+          component="form"
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
           <Typography id="modal-modal-title" variant="h5" component="h2">
             Security Question
           </Typography>
@@ -67,24 +78,16 @@ const AlertModal = ({ open, handleClose, setError }) => {
             response on registration.
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 3, fontSize: 14 }}>
-            What is your favourite color?
+            {questions[question].name}
           </Typography>
-          <FormControl sx={{ mt: 2, mb: 0, width: 100, height: 50 }}>
-            <InputLabel id="demo-simple-select-label" sx={{ fontSize: 14 }}>
-              Color
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={response}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={"red"}>Red</MenuItem>
-              <MenuItem value={"blue"}>Blue</MenuItem>
-              <MenuItem value={"green"}>Green</MenuItem>
-            </Select>
-          </FormControl>
+          <TextField
+            id="standard-basic"
+            label="Answer"
+            variant="standard"
+            sx={{ width: 150, mt: 1 }}
+            ref={responseRef}
+            onChange={handleChange}
+          />
           <div>
             <Button
               variant="contained"

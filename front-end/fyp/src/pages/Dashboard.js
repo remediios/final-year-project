@@ -51,7 +51,7 @@ const Dashboard = () => {
       localStorage.setItem("selectedPage", 1);
     }
     //Change boolean value if CA is intended to be turned off.
-    setContinuousAuthentication(true);
+    setContinuousAuthentication(false);
     //eslint-disable-next-line
   }, []);
 

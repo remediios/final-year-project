@@ -7,7 +7,7 @@ const UserBehaviour = () => {
   const [buffer, setBuffer] = useState([]);
   //eslint-disable-next-line
   const [error, setError] = useState("");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [classifierResponses, setClassifierResponses] = useState([]);
   const {
     userBehaviour,

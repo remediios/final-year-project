@@ -10,7 +10,7 @@ export function DashProvider({ children }) {
   const TRAINING_TIME = 610;
   const SERVER_SEND_TIME = 30;
   const [continuousAuthentication, setContinuousAuthentication] =
-    useState(true);
+    useState(false);
   const [caData, setCaData] = useState({});
   const [userTraining, setUserTraining] = useState(false);
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
