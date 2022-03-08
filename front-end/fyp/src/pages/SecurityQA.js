@@ -9,10 +9,12 @@ import {
   FormBoxSecurityContainer,
   HeaderText,
   SubmitButton,
+  PrevButton,
 } from "../styles/security/Global";
 import { questions } from "../config/security/questions";
 import SecurityQA1 from "../components/security/SecurityQA1";
 import { useNavigate } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
 
 const SecurityQA = () => {
   const [page, setPage] = useState(1);
@@ -23,6 +25,10 @@ const SecurityQA = () => {
     if (page === 2) {
       navigate("/dashboard");
     }
+  };
+
+  const handlePrev = () => {
+    setPage(1);
   };
 
   return (
@@ -46,9 +52,28 @@ const SecurityQA = () => {
               })}
             </FormBoxSecurityContainer>
           </div>
-          <SubmitButton type="submit" onClick={handleSubmit}>
-            {page === 1 ? "Next" : "Submit"}
-          </SubmitButton>
+          <div style={{ display: "flex" }}>
+            {page === 2 ? (
+              <PrevButton onClick={handlePrev}>
+                <BiArrowBack />
+              </PrevButton>
+            ) : (
+              ""
+            )}
+            {page === 1 ? (
+              <SubmitButton type="submit" onClick={handleSubmit}>
+                Next
+              </SubmitButton>
+            ) : (
+              <SubmitButton
+                style={{ marginLeft: "10px" }}
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Submit
+              </SubmitButton>
+            )}
+          </div>
         </BoxSecurityContainer>
       </MainContainer>
     </>

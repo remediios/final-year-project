@@ -108,6 +108,25 @@ export const Question = styled.p`
   font-size: 14px;
 `;
 
+export const PrevButton = styled.button`
+  width: 10%;
+  padding: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 100px 100px 100px 100px;
+  cursor: pointer;
+  transition: all, 240ms ease-in-out;
+  background: rgb(36, 44, 92);
+  margin-top: 40px;
+  margin-left: 30px;
+
+  &:hover {
+    background-color: rgb(61, 74, 153);
+  }
+`;
+
 export const SubmitButton = styled.button`
   width: 20%;
   padding: 10px;
