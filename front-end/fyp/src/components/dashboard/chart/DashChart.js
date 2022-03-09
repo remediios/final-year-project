@@ -28,6 +28,7 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
     setTotalButtonClicks,
     coinPageViews,
     setCoinPageViews,
+    continuousAuthentication,
   } = useDash();
 
   const fetchHistoricalData = async () => {
@@ -59,7 +60,7 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
               <CrytoTitle
                 onClick={() => {
                   setCryptoInfo(true);
-                  if (userTraining) {
+                  if (userTraining || continuousAuthentication) {
                     setCoinPageViews(coinPageViews + 1);
                   }
                 }}
@@ -108,7 +109,7 @@ const DashChart = ({ currency, selectedCoin, setCryptoInfo }) => {
                   key={day.value}
                   onClick={() => {
                     setDays(day.value);
-                    if (userTraining) {
+                    if (userTraining || continuousAuthentication) {
                       setTotalButtonClicks(totalButtonClicks + 1);
                     }
                   }}
