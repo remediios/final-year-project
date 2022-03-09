@@ -50,7 +50,7 @@ function App() {
         />
         <Route
           exact
-          path="/step1"
+          path="/securityqa"
           element={
             <PrivateRoute>
               <SecurityQA />

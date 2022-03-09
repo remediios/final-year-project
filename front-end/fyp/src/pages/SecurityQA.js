@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainContainer } from "../styles/forms/Global";
 import {
   BackSecurityDrop,
@@ -15,21 +15,37 @@ import { questions } from "../config/security/questions";
 import SecurityQA1 from "../components/security/SecurityQA1";
 import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { useAuth } from "../contexts/AuthContext";
+import { useDash } from "../contexts/DashContext";
 
 const SecurityQA = () => {
-  const [page, setPage] = useState(1);
   let navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [securityQA, setSecurityQA] = useState({});
+  const [page, setPage] = useState(1);
+  const { answer1, answer2, answer3, answer4 } = useDash();
 
   const handleSubmit = () => {
     setPage(2);
     if (page === 2) {
-      navigate("/dashboard");
+      console.log("CONTENT SUBMITED");
+      //   navigate("/dashboard");
     }
   };
 
   const handlePrev = () => {
     setPage(1);
   };
+
+  useEffect(() => {
+    setSecurityQA({
+      stringId: currentUser.uid,
+      answer1: answer1,
+      answer2: answer2,
+      answer3: answer3,
+      answer4: answer4,
+    });
+  }, [answer1, answer2, answer3, answer4]);
 
   return (
     <>

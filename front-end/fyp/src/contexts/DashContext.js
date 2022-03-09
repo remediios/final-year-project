@@ -32,6 +32,11 @@ export function DashProvider({ children }) {
   const [accessedCoins, setAccessedCoins] = useState([]);
   const [coinsAccessed, setCoinsAccessed] = useState(0);
 
+  const [answer1, setAnswer1] = useState("");
+  const [answer2, setAnswer2] = useState("");
+  const [answer3, setAnswer3] = useState("");
+  const [answer4, setAnswer4] = useState("");
+
   const value = {
     totalClicks,
     setTotalClicks,
@@ -59,6 +64,14 @@ export function DashProvider({ children }) {
     setContinuousAuthentication,
     caData,
     setCaData,
+    answer1,
+    setAnswer1,
+    answer2,
+    setAnswer2,
+    answer3,
+    setAnswer3,
+    answer4,
+    setAnswer4,
   };
 
   return <DashContext.Provider value={value}>{children}</DashContext.Provider>;
