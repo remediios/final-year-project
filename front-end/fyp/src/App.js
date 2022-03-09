@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import IdleTimer from "./classes/IdleTimer";
 import { useAuth } from "./contexts/AuthContext";
 import PrivateEmailVerified from "./components/routes/PrivateEmailVerified";
+import SecurityQA from "./pages/SecurityQA";
 
 function App() {
   const { signout } = useAuth();
@@ -49,7 +50,16 @@ function App() {
         />
         <Route
           exact
-          path="/step1"
+          path="/securityqa"
+          element={
+            <PrivateRoute>
+              <SecurityQA />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/step2"
           element={
             <PrivateRoute>
               <TypingSpeed />
