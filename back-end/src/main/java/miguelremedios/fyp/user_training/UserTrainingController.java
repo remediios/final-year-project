@@ -45,6 +45,6 @@ public class UserTrainingController {
                                        @RequestParam(required = false) Integer ks_ts,
                                        @RequestParam(required = false) Integer user_status) {
         userTrainingService.updateRecord(id, stringId, ks_kpt, md_ct, md_cvt, md_bct, dom_pv, ks_ts, user_status);
-        return "User updated successfully!";
+        return "User training record updated successfully!";
     }
 }
