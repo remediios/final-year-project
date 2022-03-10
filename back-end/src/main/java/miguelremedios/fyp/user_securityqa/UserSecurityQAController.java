@@ -1,10 +1,10 @@
 package miguelremedios.fyp.user_securityqa;
 
-import miguelremedios.fyp.user_training.UserTraining;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="api/security_qa")
@@ -21,6 +21,16 @@ public class UserSecurityQAController {
     @GetMapping
     public List<UserSecurityQA> getAnswers(){
         return securityQAService.getAnswers();
+    }
+
+    @GetMapping(path = "{id}")
+    public Optional<UserSecurityQA> getAnswersByID(@PathVariable("id") Long id){
+        return securityQAService.getAnswersByID(id);
+    }
+
+    @GetMapping(path = "/user/{stringId}")
+    public Optional<UserSecurityQA> getAnswerbyStringId(@PathVariable("stringId") String stringId){
+        return securityQAService.getAnswersByStringID(stringId);
     }
 
     @PostMapping
