@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { useAuth } from "../contexts/AuthContext";
 import { useDash } from "../contexts/DashContext";
+import axios from "axios";
 
 const SecurityQA = () => {
   let navigate = useNavigate();
@@ -28,13 +29,21 @@ const SecurityQA = () => {
   const handleSubmit = () => {
     setPage(2);
     if (page === 2) {
-      console.log("CONTENT SUBMITED");
-      //   navigate("/dashboard");
+      postData();
+      navigate("/dashboard");
     }
   };
 
   const handlePrev = () => {
     setPage(1);
+  };
+
+  const postData = async () => {
+    await axios
+      .post("http://localhost:8080/api/security_qa", securityQA)
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   useEffect(() => {

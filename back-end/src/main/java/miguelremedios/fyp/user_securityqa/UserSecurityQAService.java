@@ -20,6 +20,14 @@ public class UserSecurityQAService {
         return securityQARepository.findAll();
     }
 
+    public Optional<UserSecurityQA> getAnswersByStringID(String stringId) {
+        return securityQARepository.findUserById(stringId);
+    }
+
+    public Optional<UserSecurityQA> getAnswersByID(Long id) {
+        return securityQARepository.findById(id);
+    }
+
     public void addNewAnswer(UserSecurityQA answer) {
         securityQARepository.save(answer);
     }
