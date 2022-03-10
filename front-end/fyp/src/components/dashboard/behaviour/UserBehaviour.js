@@ -21,7 +21,7 @@ const UserBehaviour = () => {
   const handleClose = () => setOpen(false);
 
   const postData = async () => {
-    axios
+    await axios
       .post("http://localhost:8080/api/users_training", userBehaviour)
       .catch(function (error) {
         console.log(error);
@@ -29,12 +29,12 @@ const UserBehaviour = () => {
   };
 
   const sendToClassifier = async () => {
-    axios
+    await axios
       .post("http://127.0.0.1:5000/analyse", caData)
       .then(function (response) {
         let MLresponse = response.data.response;
         classifierResponses.push(MLresponse);
-        // console.log(classifierResponses);
+        console.log(classifierResponses);
         if (MLresponse === 0) {
           setContinuousAuthentication(false);
           setError("");

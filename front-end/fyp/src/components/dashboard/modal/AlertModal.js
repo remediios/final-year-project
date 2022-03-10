@@ -5,6 +5,7 @@ import { useAuth } from "../../../contexts/AuthContext";
 import { useDash } from "../../../contexts/DashContext";
 import { questions } from "../../../config/security/questions";
 import { getRandomInt } from "../../../functions/global/global";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -21,8 +22,9 @@ const style = {
 const AlertModal = ({ open, handleClose, setError }) => {
   const [response, setResponse] = useState("");
   const [question, setQuestion] = useState(0);
+  const [data, setData] = useState([]);
   const { setContinuousAuthentication } = useDash();
-  const { signout } = useAuth();
+  const { currentUser, signout } = useAuth();
   let navigate = useNavigate();
   const responseRef = useRef();
 
@@ -36,7 +38,11 @@ const AlertModal = ({ open, handleClose, setError }) => {
       return;
     }
 
-    if (response === questions[question].answer) {
+    if (data === undefined) {
+      return;
+    }
+
+    if (data !== undefined && response === data[question].answer) {
       handleClose();
       setContinuousAuthentication(true);
     } else {
@@ -49,9 +55,33 @@ const AlertModal = ({ open, handleClose, setError }) => {
     }
   };
 
+  const getSecurityAnswers = async () => {
+    const response = await axios.get(
+      `http://localhost:8080/api/security_qa/user/${currentUser.uid}`
+    );
+    let data = [
+      { answer: response.data.answer1 },
+      { answer: response.data.answer2 },
+      { answer: response.data.answer3 },
+      { answer: response.data.answer4 },
+    ];
+    setData(data);
+    return response.data;
+  };
+
+  useEffect(() => {
+    getSecurityAnswers();
+  }, []);
+
+  useEffect(() => {
+    if (data !== undefined && data.length > 0) {
+      console.log(data[question].answer);
+    }
+  }, [data]);
+
   useEffect(() => {
     let min = 0;
-    let max = questions.length - 1;
+    let max = 3;
     const number = getRandomInt(min, max);
     setQuestion(number);
   }, []);
