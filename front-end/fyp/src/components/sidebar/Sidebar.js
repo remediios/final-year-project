@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { NavBar, NavBarIcon } from "../../styles/navbar/Global";
 
-const Sidebar = ({ user, trainingFunction }) => {
+const Sidebar = ({ user, dataCollectionFunction }) => {
   const [sidebar, setSidebar] = useState(false);
   let navigate = useNavigate();
   const { signout } = useAuth();
@@ -63,7 +63,7 @@ const Sidebar = ({ user, trainingFunction }) => {
                 item={item}
                 key={index}
                 index={index}
-                trainingFunction={trainingFunction}
+                dataCollectionFunction={dataCollectionFunction}
               />
             );
           })}

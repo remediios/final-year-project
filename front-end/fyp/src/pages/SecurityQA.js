@@ -40,7 +40,7 @@ const SecurityQA = () => {
 
   const postData = async () => {
     await axios
-      .post("http://localhost:8080/api/security_qa", securityQA)
+      .post("http://localhost:8080/api/user/security_qas", securityQA)
       .catch(function (error) {
         console.log(error);
       });

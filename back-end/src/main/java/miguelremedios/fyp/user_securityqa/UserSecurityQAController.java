@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="api/security_qa")
+@RequestMapping(path="api/user/security_qas")
 @CrossOrigin(origins = "*")
 public class UserSecurityQAController {
 

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { Box, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { TrainingModeAlert } from "../../../styles/dashboard/AuthRelated";
+import { DataCollectionModeAlert } from "../../../styles/dashboard/AuthRelated";
 
-const UserTrainingAlert = ({ training }) => {
+const UserTrainingAlert = ({ dataCollection }) => {
   const [alert, setAlert] = useState(true);
   return (
     <>
-      {training && (
+      {dataCollection && (
         <Box sx={{ width: "100%" }}>
           <Collapse in={alert}>
-            <TrainingModeAlert
+            <DataCollectionModeAlert
               severity="error"
               action={
                 <IconButton
@@ -23,8 +23,8 @@ const UserTrainingAlert = ({ training }) => {
                 </IconButton>
               }
             >
-              TRAINING MODE
-            </TrainingModeAlert>
+              DATA COLLECTION MODE
+            </DataCollectionModeAlert>
           </Collapse>
         </Box>
       )}

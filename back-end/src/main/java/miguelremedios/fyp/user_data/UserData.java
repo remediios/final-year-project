@@ -1,13 +1,13 @@
-package miguelremedios.fyp.user_training;
+package miguelremedios.fyp.user_data;
 
 import javax.persistence.*;
 
-@Entity(name = "UserTraining")
-public class UserTraining {
+@Entity(name = "UserData")
+public class UserData {
 
     @Id
-    @SequenceGenerator(name="user_training_sequence", sequenceName = "user_training_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_training_sequence")
+    @SequenceGenerator(name="user_data_sequence", sequenceName = "user_data_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_data_sequence")
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "string_id", length = 28)
@@ -27,10 +27,10 @@ public class UserTraining {
     @Column(name = "user_status", nullable = false)
     private Integer user_status;
 
-    public UserTraining() {
+    public UserData() {
     }
 
-    public UserTraining(String stringId, Integer ks_kpt, Integer md_ct, Integer md_cvt, Integer md_bct, Integer dom_pv, Integer ks_ts, Integer user_status) {
+    public UserData(String stringId, Integer ks_kpt, Integer md_ct, Integer md_cvt, Integer md_bct, Integer dom_pv, Integer ks_ts, Integer user_status) {
         this.stringId = stringId;
         this.ks_kpt = ks_kpt;
         this.md_ct = md_ct;

@@ -29,7 +29,7 @@ export const SidebarData = [
     subNav: [
       {
         index: 31,
-        title: "Training Mode",
+        title: "Data Collection Mode",
         path: "#",
         icon: <IoIcons.IoIosPaper />,
         className: "sub-nav",

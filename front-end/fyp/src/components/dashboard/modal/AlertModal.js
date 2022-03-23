@@ -57,7 +57,7 @@ const AlertModal = ({ open, handleClose, setError }) => {
 
   const getSecurityAnswers = async () => {
     const response = await axios.get(
-      `http://localhost:8080/api/security_qa/user/${currentUser.uid}`
+      `http://localhost:8080/api/user/security_qas/user/${currentUser.uid}`
     );
     let data = [
       { answer: response.data.answer1 },

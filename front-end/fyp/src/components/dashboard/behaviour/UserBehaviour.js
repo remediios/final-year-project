@@ -11,7 +11,7 @@ const UserBehaviour = () => {
   const [classifierResponses, setClassifierResponses] = useState([]);
   const {
     userBehaviour,
-    userTraining,
+    userDataCollection,
     continuousAuthentication,
     setContinuousAuthentication,
     caData,
@@ -22,7 +22,7 @@ const UserBehaviour = () => {
 
   const postData = async () => {
     await axios
-      .post("http://localhost:8080/api/users_training", userBehaviour)
+      .post("http://localhost:8080/api/user/data", userBehaviour)
       .catch(function (error) {
         console.log(error);
       });
@@ -34,7 +34,6 @@ const UserBehaviour = () => {
       .then(function (response) {
         let MLresponse = response.data.response;
         classifierResponses.push(MLresponse);
-        console.log(classifierResponses);
         if (MLresponse === 0) {
           setContinuousAuthentication(false);
           setError("");
@@ -47,14 +46,10 @@ const UserBehaviour = () => {
   };
 
   useEffect(() => {
-    if (userTraining) {
+    if (userDataCollection) {
       buffer.push(userBehaviour);
-      // console.log("Behaviour", userBehaviour);
-      // console.log("Buffer updated", buffer);
       postData();
     } else if (continuousAuthentication) {
-      // console.log("Behaviour", userBehaviour);
-      // console.log("CA Data", caData);
       sendToClassifier();
     } else {
       setBuffer([]);

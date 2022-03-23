@@ -6,7 +6,7 @@ import {
   SidebarSubText,
 } from "../../styles/sidebar/SubMenu";
 
-const SubMenu = ({ item, trainingFunction }) => {
+const SubMenu = ({ item, dataCollectionFunction }) => {
   const [subnav, setSubnav] = useState(false);
   const showSubnav = () => setSubnav(!subnav);
 
@@ -34,7 +34,7 @@ const SubMenu = ({ item, trainingFunction }) => {
                 key={index}
                 onClick={() => {
                   if (item.index === 31) {
-                    trainingFunction();
+                    dataCollectionFunction();
                   }
                 }}
               >

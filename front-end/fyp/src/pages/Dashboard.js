@@ -15,8 +15,8 @@ import ContinuousAuthentication from "../components/dashboard/continuous auth/Co
 const Dashboard = () => {
   const { currentUser } = useAuth();
   const {
-    userTraining,
-    setUserTraining,
+    userDataCollection,
+    setUserDataCollection,
     setKeysPressed,
     setTotalClicks,
     setTotalButtonClicks,
@@ -32,15 +32,15 @@ const Dashboard = () => {
     setUserBehaviour,
     setTimer,
     SERVER_SEND_TIME,
-    TRAINING_TIME,
-    setTimerTraining,
+    COLLECTION_TIME,
+    setTimerDataCollection,
     setContinuousAuthentication,
   } = useDash();
   const [selectedCoin, setSelectedCoin] = useState("bitcoin");
   const [cryptoInfo, setCryptoInfo] = useState(false);
   const currency = "GBP";
   const [status, setStatus] = useState("waiting");
-  const [trainingStatus, setTrainingStatus] = useState(false);
+  const [collectionStatus, setCollectionStatus] = useState(false);
 
   useEffect(() => {
     const userSelectedCrypto = localStorage.getItem("selectedCrypto");
@@ -72,13 +72,13 @@ const Dashboard = () => {
     }
   };
 
-  const startTrainingTimer = () => {
+  const startCollectionTimer = () => {
     let interval = setInterval(() => {
-      setTimerTraining((prevCountDown) => {
+      setTimerDataCollection((prevCountDown) => {
         if (prevCountDown === 0) {
           clearInterval(interval);
-          setUserTraining(false);
-          setTrainingStatus(false);
+          setUserDataCollection(false);
+          setCollectionStatus(false);
           setUserBehaviour({
             stringId: currentUser.uid,
             ks_kpt: 0,
@@ -87,10 +87,10 @@ const Dashboard = () => {
             md_bct: 0,
             dom_pv: 0,
             ks_ts: 0,
-            user_status: 0,
+            user_status: 1,
           });
-          console.log("Training: OFF");
-          return TRAINING_TIME;
+          console.log("Data Collection: OFF");
+          return COLLECTION_TIME;
         } else {
           return prevCountDown - 1;
         }
@@ -98,22 +98,22 @@ const Dashboard = () => {
     }, 1000);
   };
 
-  const handleTrainingMode = () => {
-    setUserTraining(true);
-    setTrainingStatus(true);
-    startTrainingTimer();
+  const handleDataCollection = () => {
+    setUserDataCollection(true);
+    setCollectionStatus(true);
+    startCollectionTimer();
   };
 
   useEffect(() => {
-    if (userTraining) {
-      setTrainingStatus(true);
-      // startTrainingTimer();
-      console.log("Training: ON");
+    if (userDataCollection) {
+      setCollectionStatus(true);
+      // startCollectionTimer();
+      console.log("Data Collection: ON");
     }
-  }, [userTraining]);
+  }, [userDataCollection]);
 
   useEffect(() => {
-    if (userTraining) {
+    if (userDataCollection) {
       setStatus("started");
       if (status === "started") {
         startDataRetrievalTimer();
@@ -139,13 +139,16 @@ const Dashboard = () => {
       }
     }
     //eslint-disable-next-line
-  }, [status, trainingStatus]);
+  }, [status, collectionStatus]);
 
   return (
     <>
-      <Sidebar user={currentUser} trainingFunction={handleTrainingMode} />
+      <Sidebar
+        user={currentUser}
+        dataCollectionFunction={handleDataCollection}
+      />
       <EmailNotVerifiedAlert user={currentUser} />
-      <UserTrainingAlert training={userTraining} />
+      <UserTrainingAlert dataCollection={userDataCollection} />
       <UserBehaviour />
       <ContinuousAuthentication />
       <Container id="dashContainer">

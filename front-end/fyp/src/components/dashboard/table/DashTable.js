@@ -20,7 +20,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
   const [search, setSearch] = useState("");
   const searchCoinRef = useRef();
   const {
-    userTraining,
+    userDataCollection,
     keysPressed,
     setKeysPressed,
     setCoinsAccessed,
@@ -89,7 +89,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
               }}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => {
-                if (userTraining || continuousAuthentication) {
+                if (userDataCollection || continuousAuthentication) {
                   handleKeyDown(e);
                 } else return;
               }}
@@ -106,7 +106,7 @@ const DashTable = ({ currency, selectedCoin, setSelectedCoin }) => {
                         onClick={() => {
                           setSelectedCoin(row.id);
                           localStorage.setItem("selectedCrypto", row.id);
-                          if (userTraining || continuousAuthentication) {
+                          if (userDataCollection || continuousAuthentication) {
                             if (!accessedCoins.includes(row.id)) {
                               setAccessedCoins((oldArray) => [
                                 ...oldArray,

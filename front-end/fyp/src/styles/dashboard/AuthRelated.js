@@ -9,7 +9,7 @@ export const AuthVerifyAlert = styled(Alert)`
   text-align: center;
 `;
 
-export const TrainingModeAlert = styled(Alert)`
+export const DataCollectionModeAlert = styled(Alert)`
   width: 24%;
   margin: auto;
   margin-top: 1rem;

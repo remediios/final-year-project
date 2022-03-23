@@ -1,4 +1,4 @@
-package miguelremedios.fyp.user_training;
+package miguelremedios.fyp.user_data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -6,31 +6,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/users_training")
+@RequestMapping(path="api/user/data")
 @CrossOrigin(origins = "*")
-public class UserTrainingController {
+public class UserDataController {
 
-    private final UserTrainingService userTrainingService;
+    private final UserDataService userDataService;
 
     @Autowired
-    public UserTrainingController(UserTrainingService userTrainingService) {
-        this.userTrainingService = userTrainingService;
+    public UserDataController(UserDataService userDataService) {
+        this.userDataService = userDataService;
     }
 
     @GetMapping
-    public List<UserTraining> getTrainingRecords(){
-        return userTrainingService.getRecords();
+    public List<UserData> getTrainingRecords(){
+        return userDataService.getRecords();
     }
 
     @PostMapping
-    public String registerTrainingRecord(@RequestBody UserTraining record) {
-        userTrainingService.addNewRecord(record);
+    public String registerTrainingRecord(@RequestBody UserData record) {
+        userDataService.addNewRecord(record);
         return "Training record created successfully!";
     }
 
     @DeleteMapping(path = "{id}")
     public String deleteRecord(@PathVariable("id") Long id) {
-        userTrainingService.deleteRecord(id);
+        userDataService.deleteRecord(id);
         return "Training record deleted successfully!";
     }
 
@@ -44,7 +44,7 @@ public class UserTrainingController {
                                        @RequestParam(required = false) Integer dom_pv,
                                        @RequestParam(required = false) Integer ks_ts,
                                        @RequestParam(required = false) Integer user_status) {
-        userTrainingService.updateRecord(id, stringId, ks_kpt, md_ct, md_cvt, md_bct, dom_pv, ks_ts, user_status);
+        userDataService.updateRecord(id, stringId, ks_kpt, md_ct, md_cvt, md_bct, dom_pv, ks_ts, user_status);
         return "User training record updated successfully!";
     }
 }

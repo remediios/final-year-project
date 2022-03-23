@@ -7,14 +7,15 @@ export function useDash() {
 }
 
 export function DashProvider({ children }) {
-  const TRAINING_TIME = 610;
+  const COLLECTION_TIME = 610;
   const SERVER_SEND_TIME = 30;
   const [continuousAuthentication, setContinuousAuthentication] =
     useState(true);
   const [caData, setCaData] = useState({});
-  const [userTraining, setUserTraining] = useState(false);
+  const [userDataCollection, setUserDataCollection] = useState(false);
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
-  const [timerTraining, setTimerTraining] = useState(TRAINING_TIME);
+  const [timerDataCollection, setTimerDataCollection] =
+    useState(COLLECTION_TIME);
   const [userBehaviour, setUserBehaviour] = useState({
     stringId: "",
     ks_kpt: 0,
@@ -40,8 +41,8 @@ export function DashProvider({ children }) {
   const value = {
     totalClicks,
     setTotalClicks,
-    userTraining,
-    setUserTraining,
+    userDataCollection,
+    setUserDataCollection,
     keysPressed,
     setKeysPressed,
     timer,
@@ -56,10 +57,10 @@ export function DashProvider({ children }) {
     setCoinsAccessed,
     accessedCoins,
     setAccessedCoins,
-    timerTraining,
-    setTimerTraining,
+    timerDataCollection,
+    setTimerDataCollection,
     SERVER_SEND_TIME,
-    TRAINING_TIME,
+    COLLECTION_TIME,
     continuousAuthentication,
     setContinuousAuthentication,
     caData,

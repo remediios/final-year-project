@@ -44,7 +44,7 @@ const SignUp = () => {
         emailRef.current.value,
         passwordRef.current.value
       );
-      navigate("/step1");
+      navigate("/securityqa");
     } catch (error) {
       console.log(error);
       switch (error.code) {
