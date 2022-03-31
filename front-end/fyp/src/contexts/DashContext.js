@@ -8,9 +8,9 @@ export function useDash() {
 
 export function DashProvider({ children }) {
   const COLLECTION_TIME = 610;
-  const SERVER_SEND_TIME = 10;
+  const SERVER_SEND_TIME = 30;
   const [continuousAuthentication, setContinuousAuthentication] =
-    useState(false);
+    useState(true);
   const [caData, setCaData] = useState({});
   const [userDataCollection, setUserDataCollection] = useState(false);
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
