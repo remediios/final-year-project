@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FypApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads( ) {
 	}
 
 }

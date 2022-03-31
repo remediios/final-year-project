@@ -11,12 +11,12 @@ dataset = pd.read_csv("dataset.csv")
 dataset.drop('id', axis=1, inplace=True)
 
 # set inputs and outputs
-#Dataset without correct dependent variable values
+#Dataset without dependent variable values
 x = dataset.drop('user_status',axis = 1)
 #Dependent variable values
 y = dataset['user_status']
 
-# data scaling for better result
+# data scaling
 scaler = StandardScaler()
 data_scaled = scaler.fit_transform(x)
 df_scaled = pd.DataFrame(data_scaled)

@@ -8,9 +8,9 @@ export function useDash() {
 
 export function DashProvider({ children }) {
   const COLLECTION_TIME = 610;
-  const SERVER_SEND_TIME = 30;
+  const SERVER_SEND_TIME = 10;
   const [continuousAuthentication, setContinuousAuthentication] =
-    useState(true);
+    useState(false);
   const [caData, setCaData] = useState({});
   const [userDataCollection, setUserDataCollection] = useState(false);
   const [timer, setTimer] = useState(SERVER_SEND_TIME);
@@ -24,7 +24,7 @@ export function DashProvider({ children }) {
     md_bct: 0,
     dom_pv: 0,
     ks_ts: 0,
-    user_status: 1,
+    user_status: 0,
   });
   const [keysPressed, setKeysPressed] = useState(0);
   const [totalClicks, setTotalClicks] = useState(0);
